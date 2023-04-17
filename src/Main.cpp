@@ -5,26 +5,15 @@
 ** Main and starting function
 */
 
-#include "nts/ComponentMap.hpp"
-#include "nts/Exception.hpp"
-#include "nts/Instruction.hpp"
+#include <iostream>
+#include "Math.hpp"
+#include "Raytracer.hpp"
 
-bool setup(int const ac, char const * const * const av, \
-    nts::InstructionList &list);
-bool generate(nts::InstructionList &instructionList, \
-    nts::ComponentMap &componentMap);
-bool loop(nts::ComponentMap &componentMap);
-
-int main(int const ac, char const * const * const av)
+int main(__attribute__((unused)) int const ac, __attribute__((unused)) \
+    char const * const * const av)
 {
-    nts::InstructionList instructionList;
-    nts::ComponentMap componentMap;
+    Raytracer::Ray ray(Math::Point3D(1, 1, 1), Math::Vector3D(2, 3, 4));
 
-    if (!setup(ac, av, instructionList))
-        return 84;
-    if (!generate(instructionList, componentMap))
-        return 84;
-    if (!loop(componentMap))
-        return 84;
+    std::cout << ray << std::endl;
     return 0;
 }

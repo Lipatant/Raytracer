@@ -1,7 +1,7 @@
 docs
 *.o
 build
-nanotekspice
+raytracer
 .vscode
 logs*.txt
 test*.txt

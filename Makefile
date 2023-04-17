@@ -2,33 +2,12 @@
 ## EPITECH PROJECT, 2023
 ## Makefile
 ## File description:
-## Makefile de NanoTekSpice
+## Makefile de Raytracer
 ##
 
-SRC	=	Generate.cpp														\
-		Generate/Add.cpp													\
-		Loop.cpp															\
-		Loop/Display.cpp													\
-		Loop/Exit.cpp														\
-		Loop/Input.cpp														\
-		Loop/Loop.cpp														\
-		Loop/Simulate.cpp													\
-		Main.cpp															\
-		Setup.cpp															\
-		Setup/GetFilename.cpp												\
-		Setup/GetFileStream.cpp												\
-		Setup/Parse.cpp														\
-		nts/Component/AComponent.cpp										\
-		nts/Component/Complex.cpp											\
-		nts/Component/Input.cpp												\
-		nts/Component/Logic.cpp												\
-		nts/ComponentFactory.cpp											\
-		nts/ComponentMap.cpp												\
-		nts/Exception.cpp													\
-		nts/Instruction.cpp													\
-		nts/Instruction/Parsing.cpp											\
-		nts/Tristate.cpp													\
-		Utility/Regex.cpp													\
+SRC	=	$(shell cat make/math.txt | tr '\n' ' ')							\
+		$(shell cat make/utility.txt | tr '\n' ' ')							\
+		$(shell cat make/raytracer.txt | tr '\n' ' ')						\
 
 BUILDDIR = build
 
@@ -38,7 +17,7 @@ $(BUILDDIR)/%.o: 	src/%.cpp
 	@mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
-NAME	=	nanotekspice
+NAME	=	raytracer
 
 LDFLAGS	=
 
@@ -46,7 +25,7 @@ IDIR	=	include
 
 CPPFLAGS	=	-I$(IDIR) -I./include
 
-CFLAGS	=	-W -Wextra
+CFLAGS	=	-W -Wall -Wextra
 
 GCCFLAG	=	g++ -o
 
