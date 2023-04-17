@@ -6,6 +6,7 @@
 ##
 
 SRC	=	$(shell cat make/math.txt | tr '\n' ' ')							\
+		$(shell cat make/shape.txt | tr '\n' ' ')							\
 		$(shell cat make/utility.txt | tr '\n' ' ')							\
 		$(shell cat make/raytracer.txt | tr '\n' ' ')						\
 

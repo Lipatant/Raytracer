@@ -23,9 +23,12 @@ public: // Main Attributes
     Raytracer::RayDirection direction;
 public:
     Ray(void);
+    Ray(Raytracer::RayOrigin const origin);
     Ray(Raytracer::RayDirection const direction);
     Ray(Raytracer::RayOrigin const origin, Raytracer::RayDirection const \
         direction);
+    Ray(Raytracer::RayDirection const direction, Raytracer::RayOrigin const \
+        origin);
     Ray(Ray const &other);
     ~Ray() = default;
     //

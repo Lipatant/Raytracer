@@ -8,7 +8,7 @@
 #include "Math/Vector3D.hpp"
 
 Math::Vector3D::Vector3D(void) :
-    Point3D()
+    Point3D(1, 1, 1)
 { }
 
 Math::Vector3D::Vector3D(Math::Vector3DValue const x, Math::Vector3DValue \

@@ -8,12 +8,13 @@
 #include <iostream>
 #include "Math.hpp"
 #include "Raytracer.hpp"
+#include "Shape.hpp"
 
 int main(__attribute__((unused)) int const ac, __attribute__((unused)) \
     char const * const * const av)
 {
-    Raytracer::Ray ray(Math::Point3D(1, 1, 1), Math::Vector3D(2, 3, 4));
+    Shape::Shape sphere1 = Shape::createShape<Shape::AShape>();
 
-    std::cout << ray << std::endl;
+    std::cout << sphere1 << std::endl;
     return 0;
 }
