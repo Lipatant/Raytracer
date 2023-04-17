@@ -1,0 +1,33 @@
+# 1-bit Adder
+
+.chipsets:
+# inputs and outputs
+input       a           # first value
+input       b           # second value
+input       cin         # carry input
+output      sum         # sum
+output      cout        # carry output
+# gates
+xor         op1_ab      # ab=a+b (w/ no carry)
+and         op1_abc     # C =a+b (carry)
+xor         op2_ab      # ab=C+c (w/ no carry)
+and         op2_abc     # C'=C+c (carry)
+or          op_carry    # gives the end carry
+
+.links:
+# a+b
+a:1         op1_ab:1
+b:1         op1_ab:2
+a:1         op1_abc:1
+b:1         op1_abc:2
+# C+c
+op1_ab:3    op2_ab:1
+cin:1       op2_ab:2
+op1_ab:3    op2_abc:1
+cin:1       op2_abc:2
+# end carry
+op2_abc:3   op_carry:1
+op1_abc:3   op_carry:2
+# outputs
+op2_ab:3    sum:1
+op_carry:3  cout:1

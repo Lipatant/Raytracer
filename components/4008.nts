@@ -1,0 +1,74 @@
+# 4-bits Adder (4008)
+#
+#                  +-14- out_c
+#                  |
+#           +-4008-^------+
+#           |      |      |
+# in_b4 -15->---+--^--+   |
+#           |   | sum |--->-13- out_3
+# in_a4  -1->---+--+--+   |
+#           |      |      |
+# in_b3  -2->---+--^--+   |
+#           |   | sum |--->-12- out_2
+# in_a3  -3->---+--+--+   |
+#           |      |      |
+# in_b2  -4->---+--^--+   |
+#           |   | sum |--->-11- out_1
+# in_a2  -5->---+--+--+   |
+#           |      |      |
+# in_b1  -6->---+--^--+   |
+#           |   | sum |--->-10- out_0
+# in_a1  -7->---+--+--+   |
+#           |      |      |
+# in_c   -9->------+      |
+#           |             |
+#        -8-+- ign   ign -+-16-
+#           |             |
+#           +-------------+
+
+.chipsets:
+# left
+input       a4
+input       b3
+input       a3
+input       b2
+input       a2
+input       b1
+input       a1
+ignored     vss
+input       cin
+# right
+output      out0
+output      out1
+output      out2
+output      out3
+output      cout
+input       b4
+ignored     vdd
+# inside
+adder1b     sum4
+adder1b     sum3
+adder1b     sum2
+adder1b     sum1
+
+.links:
+# inputs to adders
+a4:1        sum4:1
+b4:1        sum4:2
+a3:1        sum3:1
+b3:1        sum3:2
+a2:1        sum2:1
+b2:1        sum2:2
+a1:1        sum1:1
+b1:1        sum1:2
+cin:1       sum1:3
+# regular outputs from adders
+sum1:4      out0:1
+sum2:4      out1:1
+sum3:4      out2:1
+sum4:4      out3:1
+# carry outputs from adders
+sum1:5      sum2:3
+sum2:5      sum3:3
+sum3:5      sum4:3
+sum4:5      cout:1

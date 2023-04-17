@@ -1,0 +1,8 @@
+docs
+*.o
+build
+nanotekspice
+.vscode
+logs*.txt
+test*.txt
+private
