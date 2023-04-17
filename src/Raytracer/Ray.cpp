@@ -19,6 +19,6 @@ Raytracer::RayDirectionValue Raytracer::Ray::length(void) const
 
 std::ostream &operator<<(std::ostream &stream, Raytracer::Ray const &vector)
 {
-    stream << "v(" << vector.origin << '|' << vector.direction << ')';
+    stream << "R(" << vector.origin << '|' << vector.direction << ')';
     return stream;
 }

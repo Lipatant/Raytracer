@@ -1,3 +1,6 @@
 Math/Point3D.cpp
 Math/Point3D/Constructors.cpp
 Math/Point3D/Operators.cpp
+Math/Vector3D.cpp
+Math/Vector3D/Constructors.cpp
+Math/Vector3D/Operators.cpp
