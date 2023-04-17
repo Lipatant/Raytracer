@@ -7,6 +7,11 @@
 
 #include "Shape/Sphere.hpp"
 
-Shape::Sphere::Sphere(void) :
-    AShape("Sphere")
+Shape::Sphere::Sphere(Math::Point3D const center, Math::Vector3DValue const \
+    radius) : AShape("Sphere"), _center(center), _radius(radius)
 { }
+
+bool Shape::Sphere::hits(Raytracer::Ray const &ray) const
+{
+    return false;
+}

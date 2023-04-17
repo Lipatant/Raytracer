@@ -6,4 +6,5 @@
 */
 
 #pragma once
+#include "Raytracer/Display.hpp"
 #include "Raytracer/Ray.hpp"

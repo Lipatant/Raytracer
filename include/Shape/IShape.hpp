@@ -8,6 +8,7 @@
 #pragma once
 #include <memory>
 #include <iostream>
+#include "Raytracer/Ray.hpp"
 
 namespace Shape {
 
@@ -16,6 +17,7 @@ class IShape
 public:
     virtual ~IShape() = default;
     //
+    virtual bool hits(Raytracer::Ray const &ray) const = 0;
     virtual std::string name(void) const = 0;
 };
 

@@ -18,7 +18,8 @@ public:
     AShape(void);
     AShape(std::string const &name);
     //
-    std::string name(void) const;
+    bool hits(Raytracer::Ray const &ray) const override;
+    std::string name(void) const final;
 };
 
 }
