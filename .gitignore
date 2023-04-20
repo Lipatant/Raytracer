@@ -1,8 +1,17 @@
-docs
+# Exception folder =>
+
+# Generic file =>
+.vscode/
+
+*~
 *.o
-build
-raytracer
-.vscode
+*.pdf
 logs*.txt
 test*.txt
-private
+
+build/
+docs/
+private/
+
+# Specific file =>
+raytracer
