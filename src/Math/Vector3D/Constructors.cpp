@@ -17,6 +17,10 @@ Math::Vector3D::Vector3D(Math::Vector3DValue const x, Math::Vector3DValue \
     static_cast<Math::Point3DValue>(z))
 { }
 
+Math::Vector3D::Vector3D(Math::Point3D const &point) :
+    Point3D(point)
+{ }
+
 Math::Vector3D::Vector3D(Vector3D const &other) :
     Point3D(static_cast<Math::Point3DValue>(other.x), static_cast \
     <Math::Point3DValue>(other.y), static_cast<Math::Point3DValue>(other.z))

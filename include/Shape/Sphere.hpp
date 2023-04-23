@@ -19,8 +19,11 @@ protected:
     Math::Vector3DValue _radius;
 public:
     Sphere(Math::Point3D const center, Math::Vector3DValue const radius);
+    Sphere(Math::Point3D const center, Math::Vector3DValue const radius, \
+        Raytracer::Texture const &texture);
     //
-    bool hits(Raytracer::Ray const &ray) const override;
+    Raytracer::HitPointList hitPoints(Raytracer::Ray const &ray) const \
+        override;
 };
 
 }

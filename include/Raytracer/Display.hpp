@@ -8,17 +8,9 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include "Raytracer/DisplayPixel.hpp"
 
 namespace Raytracer {
-
-struct DisplayPixel_s {
-    std::uint8_t r;
-    std::uint8_t g;
-    std::uint8_t b;
-    std::uint8_t a;
-};
-
-using DisplayPixel = struct DisplayPixel_s;
 
 class Display
 {
@@ -32,7 +24,9 @@ public:
     ~Display();
     //
     Raytracer::DisplayPixel &at(std::size_t const id);
+    Raytracer::DisplayPixel &at(std::size_t const x, std::size_t const y);
     Raytracer::DisplayPixel at(std::size_t const id) const;
+    Raytracer::DisplayPixel at(std::size_t const x, std::size_t const y) const;
     //
     std::size_t width(void) const;
     std::size_t height(void) const;

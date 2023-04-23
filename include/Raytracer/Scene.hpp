@@ -18,7 +18,13 @@ public: // Main Attributes
     std::list<Shape::Shape> shapes;
     Raytracer::Camera camera;
 public:
+    Raytracer::HitPointList rayListCollisions(Raytracer::Ray const &ray);
     Raytracer::Display render(void);
+    Raytracer::DisplayPixel renderAt(std::size_t const x, std::size_t const y);
+    Raytracer::Color renderFromList(Raytracer::HitPointList hitPointList, \
+        Raytracer::Color light, std::size_t const recurrence);
+    //
+//    void operator<<(Shape::Shape &shape);
 };
 
 }

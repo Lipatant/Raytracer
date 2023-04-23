@@ -1,7 +1,12 @@
 Main.cpp
 Raytracer/Camera.cpp
+Raytracer/Color.cpp
+Raytracer/Color/Constructors.cpp
+Raytracer/Color/Operators.cpp
 Raytracer/Display.cpp
+Raytracer/HitPoint.cpp
 Raytracer/Ray.cpp
 Raytracer/Ray/Constructors.cpp
 Raytracer/Ray/Operators.cpp
 Raytracer/Scene.cpp
+Raytracer/Texture.cpp

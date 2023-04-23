@@ -11,9 +11,9 @@
 
 namespace Math {
 
-using Vector3DValue = Math::Point3DValue;
+using Vector3DValue = double;
 
-class Vector3D : public Point3D
+class Vector3D : public Math::Point3D
 {
 public:
     using Point3D::Point3D;
@@ -21,6 +21,7 @@ public:
     Vector3D(void);
     Vector3D(Math::Vector3DValue const x, Math::Vector3DValue const y, \
         Math::Vector3DValue const z);
+    Vector3D(Point3D const &point);
     Vector3D(Vector3D const &other);
     ~Vector3D() = default;
     //

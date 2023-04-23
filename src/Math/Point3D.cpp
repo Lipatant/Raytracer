@@ -18,6 +18,14 @@ Math::Point3DValue Math::Point3D::length(void) const
     return sqrt(std::abs(x * x + y * y + z * z));
 }
 
+Math::Point3DValue Math::Point3D::length(Math::Point3D const &origin) const
+{
+    Math::Point3D relative(x, y, z);
+
+    relative -= origin;
+    return relative.length();
+}
+
 std::ostream &operator<<(std::ostream &stream, Math::Point3D const &point)
 {
     stream << "p(" << point.x << ',' << point.y << ',' << point.z << ')';
