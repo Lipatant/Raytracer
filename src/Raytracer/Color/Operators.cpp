@@ -12,14 +12,15 @@ void Raytracer::Color::operator=(Raytracer::Color const &other)
     r = other.r; g = other.g; b = other.b; a = other.a;
 }
 
-Raytracer::Color Raytracer::Color::operator*(Raytracer::ColorValue const \
-    alpha) const
+Raytracer::Color Raytracer::Color::operator+(Raytracer::Color const &other) \
+    const
 {
     Raytracer::Color color = *this;
 
-    std::cout << "operator*: " << color << " * " << alpha << " = ";
-    color.a *= alpha;
-    std::cout << color << std::endl;
+    color.r = (color.r * color.a + other.r * other.a) / (color.a + other.a);
+    color.g = (color.g * color.a + other.g * other.a) / (color.a + other.a);
+    color.b = (color.b * color.a + other.b * other.a) / (color.a + other.a);
+    color.a += other.a;
     return color;
 }
 
@@ -35,19 +36,22 @@ Raytracer::Color Raytracer::Color::operator*(Raytracer::Color const &other) \
     return color;
 }
 
-void Raytracer::Color::operator*=(Raytracer::ColorValue const alpha)
+void Raytracer::Color::operator+=(Raytracer::Color const &other)
 {
-    a *= alpha;
+    Raytracer::ColorValue divisor = (a + other.a == 0) ? 1 : (a + other.a);
+
+    r = (r * a + other.r * other.a) / divisor;
+    g = (g * a + other.g * other.a) / divisor;
+    b = (b * a + other.b * other.a) / divisor;
+    a += other.a;
 }
 
 void Raytracer::Color::operator*=(Raytracer::Color const &other)
 {
-    std::cout << "operator*=: " << *this << " * " << other << " = ";
     r *= other.r;
     g *= other.g;
     b *= other.b;
     a *= other.a;
-    std::cout << *this << std::endl;
 }
 
 bool Raytracer::Color::operator==(Raytracer::Color const &other) const
@@ -58,4 +62,18 @@ bool Raytracer::Color::operator==(Raytracer::Color const &other) const
 bool Raytracer::Color::operator!=(Raytracer::Color const &other) const
 {
     return (r != other.r || g != other.g || b != other.b || a != other.a);
+}
+
+Raytracer::Color Raytracer::Color::operator*(Raytracer::ColorValue const \
+    alpha) const
+{
+    Raytracer::Color color = *this;
+
+    color.a *= alpha;
+    return color;
+}
+
+void Raytracer::Color::operator*=(Raytracer::ColorValue const alpha)
+{
+    a *= alpha;
 }

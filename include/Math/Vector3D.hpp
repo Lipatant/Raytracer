@@ -36,6 +36,16 @@ public:
     void operator/=(Vector3D const &other);
     bool operator==(Vector3D const &other) const;
     bool operator!=(Vector3D const &other) const;
+    //
+    using Math::Point3D::operator+;
+    using Math::Point3D::operator-;
+    using Math::Point3D::operator*;
+    using Math::Point3D::operator/;
+    //
+    Vector3D variation(void) const;
+    Vector3D variation(double const centering) const;
+    Vector3D variation(bool const inverted) const;
+    Vector3D variation(double const centering, bool const inverted) const;
 };
 
 }

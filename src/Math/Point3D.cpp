@@ -6,9 +6,15 @@
 */
 
 #include "Math/Point3D.hpp"
+#include "Math/Vector3D.hpp"
 #include <cmath>
 
-Math::Point3DValue Math::Point3D::dot(Point3D const &other) const
+Math::Point3DValue Math::Point3D::dot(Math::Point3D const &other) const
+{
+    return (x * other.x + y * other.y + z * other.z);
+}
+
+Math::Point3DValue Math::Point3D::dot(Math::Vector3D const &other) const
 {
     return (x * other.x + y * other.y + z * other.z);
 }

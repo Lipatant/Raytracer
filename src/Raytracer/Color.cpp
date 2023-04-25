@@ -7,19 +7,37 @@
 
 #include "Raytracer/Color.hpp"
 
+static Raytracer::DisplayPixelValue _colorToDisplayPixelValue( \
+    Raytracer::ColorValue const value)
+{
+    if (value <= Raytracer::ColorValueMinimum)
+        return Raytracer::DisplayPixelValueMinimum;
+    if (value >= Raytracer::ColorValueMaximum)
+        return Raytracer::DisplayPixelValueMaximum;
+    return static_cast<Raytracer::DisplayPixelValue>((value * \
+        Raytracer::DisplayPixelValueMaximum) / Raytracer::ColorValueMaximum);
+}
+
 Raytracer::DisplayPixel Raytracer::Color::toDisplayPixel(void) const
 {
     Raytracer::DisplayPixel displayPixel;
 
-    displayPixel.r = static_cast<Raytracer::DisplayPixelValue>(r * \
-        Raytracer::DisplayPixelValueMaximum);
-    displayPixel.g = static_cast<Raytracer::DisplayPixelValue>(g * \
-        Raytracer::DisplayPixelValueMaximum);
-    displayPixel.b = static_cast<Raytracer::DisplayPixelValue>(b * \
-        Raytracer::DisplayPixelValueMaximum);
-    displayPixel.a = static_cast<Raytracer::DisplayPixelValue>(a * \
-        Raytracer::DisplayPixelValueMaximum);
+    displayPixel.r = _colorToDisplayPixelValue(r);
+    displayPixel.g = _colorToDisplayPixelValue(g);
+    displayPixel.b = _colorToDisplayPixelValue(b);
+    displayPixel.a = _colorToDisplayPixelValue(a);
     return displayPixel;
+}
+
+Raytracer::Color Raytracer::Color::withoutAlpha(void) const
+{
+    Raytracer::Color color(*this);
+
+    color.r *= color.a;
+    color.g *= color.a;
+    color.b *= color.a;
+    color.a = Raytracer::ColorValueMaximum;
+    return color;
 }
 
 std::ostream &operator<<(std::ostream &stream, Raytracer::Color const &color)

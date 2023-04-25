@@ -32,15 +32,20 @@ public:
     ~Color() = default;
     //
     void operator=(Raytracer::Color const &other);
-    Raytracer::Color operator*(Raytracer::ColorValue const a) const;
+    Raytracer::Color operator+(Raytracer::Color const &other) const;
     Raytracer::Color operator*(Raytracer::Color const &other) const;
-    void operator*=(Raytracer::ColorValue const a);
+    void operator+=(Raytracer::Color const &other);
     void operator*=(Raytracer::Color const &other);
     bool operator==(Raytracer::Color const &other) const;
     bool operator!=(Raytracer::Color const &other) const;
     //
+    Raytracer::Color operator*(Raytracer::ColorValue const a) const;
+    void operator*=(Raytracer::ColorValue const a);
+    //
     /// @brief Converts the object to a DisplayPixel structure
     Raytracer::DisplayPixel toDisplayPixel(void) const;
+    /// @brief Converts the alpha value into the regular rgb values
+    Raytracer::Color withoutAlpha(void) const;
 };
 
 }

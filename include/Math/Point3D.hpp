@@ -13,6 +13,8 @@ namespace Math {
 
 using Point3DValue = double;
 
+class Vector3D;
+
 class Point3D {
 public: // Main Attributes
     Math::Point3DValue x;
@@ -37,9 +39,17 @@ public:
     bool operator==(Point3D const &other) const;
     bool operator!=(Point3D const &other) const;
     //
+    Point3D operator+(Math::Point3DValue const value) const;
+    Point3D operator-(Math::Point3DValue const value) const;
+    Point3D operator*(Math::Point3DValue const value) const;
+    Point3D operator/(Math::Point3DValue const value) const;
+    //
     /// @brief Compute the dot product (produit scalaire) of this point and
     ///     another
     Math::Point3DValue dot(Point3D const &other) const;
+    /// @brief Compute the dot product (produit scalaire) of this point and
+    ///     another
+    Math::Point3DValue dot(Vector3D const &other) const;
     /// @brief Compute the distance between origin and this point
     /// @param origin (optional) Its value is set to p(0,0,0) by default
     Math::Point3DValue length(void) const;

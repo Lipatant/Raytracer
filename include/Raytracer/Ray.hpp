@@ -17,6 +17,8 @@ using RayOriginValue = Math::Point3DValue;
 using RayDirection = Math::Vector3D;
 using RayDirectionValue = Math::Vector3DValue;
 
+static const unsigned short Angle3DValueMax = Raytracer::Angle3DValueMax;
+
 class Ray {
 public: // Main Attributes
     Raytracer::RayOrigin origin;
