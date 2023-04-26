@@ -18,6 +18,64 @@ static Raytracer::DisplayPixelValue _colorToDisplayPixelValue( \
         Raytracer::DisplayPixelValueMaximum) / Raytracer::ColorValueMaximum);
 }
 
+void Raytracer::Color::addAllColorValues(Raytracer::Color const &other)
+{
+    r += other.r;
+    g += other.g;
+    b += other.b;
+    a += other.a;
+}
+
+void Raytracer::Color::blend(Raytracer::Color const &other)
+{
+    Raytracer::ColorValue divisor = (a + other.a == 0) ? 1 : (a + other.a);
+
+    r = (r * a + other.r * other.a) / divisor;
+    g = (g * a + other.g * other.a) / divisor;
+    b = (b * a + other.b * other.a) / divisor;
+    a += other.a;
+}
+
+Raytracer::Color Raytracer::Color::blended(Raytracer::Color const &other) const
+{
+    Raytracer::Color color(*this);
+
+    color.blend(other);
+    return color;
+}
+
+void Raytracer::Color::divideEveryColor(Raytracer::ColorValue const value)
+{
+    r /= value;
+    g /= value;
+    b /= value;
+    a /= value;
+}
+
+static void normalizeColor(Raytracer::ColorValue &value)
+{
+    if (value > Raytracer::ColorValueMaximum)
+        value = Raytracer::ColorValueMaximum;
+    if (value < Raytracer::ColorValueMinimum)
+        value = Raytracer::ColorValueMinimum;
+}
+
+void Raytracer::Color::normalize(void)
+{
+    normalizeColor(r);
+    normalizeColor(g);
+    normalizeColor(b);
+    normalizeColor(a);
+}
+
+Raytracer::Color Raytracer::Color::normalized(void) const
+{
+    Raytracer::Color color(*this);
+
+    color.normalize();
+    return color;
+}
+
 Raytracer::DisplayPixel Raytracer::Color::toDisplayPixel(void) const
 {
     Raytracer::DisplayPixel displayPixel;

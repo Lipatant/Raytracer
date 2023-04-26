@@ -8,4 +8,5 @@
 #pragma once
 #include "Shape/AShape.hpp"
 #include "Shape/IShape.hpp"
+#include "Shape/Plane.hpp"
 #include "Shape/Sphere.hpp"

@@ -9,4 +9,7 @@ Raytracer/Ray.cpp
 Raytracer/Ray/Constructors.cpp
 Raytracer/Ray/Operators.cpp
 Raytracer/Scene.cpp
+Raytracer/Scene/Render.cpp
+Raytracer/Scene/Render/At.cpp
+Raytracer/Scene/Render/FromList.cpp
 Raytracer/Texture.cpp

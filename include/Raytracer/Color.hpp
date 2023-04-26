@@ -41,7 +41,22 @@ public:
     //
     Raytracer::Color operator*(Raytracer::ColorValue const a) const;
     void operator*=(Raytracer::ColorValue const a);
+    Raytracer::Color operator/(Raytracer::ColorValue const a) const;
+    void operator/=(Raytracer::ColorValue const a);
     //
+    /// @brief Adds all the color values from another color to this one,
+    ///     regarless any convertion
+    void addAllColorValues(Raytracer::Color const &other);
+    /// @brief
+    void blend(Raytracer::Color const &other);
+    /// @brief
+    Raytracer::Color blended(Raytracer::Color const &other) const;
+    /// @brief Divides every color by a certain value
+    void divideEveryColor(Raytracer::ColorValue const value);
+    /// @brief
+    void normalize(void);
+    /// @brief
+    Raytracer::Color normalized(void) const;
     /// @brief Converts the object to a DisplayPixel structure
     Raytracer::DisplayPixel toDisplayPixel(void) const;
     /// @brief Converts the alpha value into the regular rgb values

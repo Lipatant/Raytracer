@@ -42,10 +42,19 @@ public:
     using Math::Point3D::operator*;
     using Math::Point3D::operator/;
     //
+    /// @brief
+    void normalize(void);
+    /// @brief
+    Math::Vector3D normalized(void) const;
+    //
     Vector3D variation(void) const;
     Vector3D variation(double const centering) const;
+    Vector3D variation(double const centering, double const forcedCentering) \
+        const;
     Vector3D variation(bool const inverted) const;
     Vector3D variation(double const centering, bool const inverted) const;
+    Vector3D variation(double const centering, double const forcedCentering, \
+        bool const inverted) const;
 };
 
 }

@@ -44,16 +44,16 @@ public:
     Point3D operator*(Math::Point3DValue const value) const;
     Point3D operator/(Math::Point3DValue const value) const;
     //
-    /// @brief Compute the dot product (produit scalaire) of this point and
+    /// @brief Computes the dot product (produit scalaire) of this point and
     ///     another
     Math::Point3DValue dot(Point3D const &other) const;
-    /// @brief Compute the dot product (produit scalaire) of this point and
+    /// @brief Computes the dot product (produit scalaire) of this point and
     ///     another
     Math::Point3DValue dot(Vector3D const &other) const;
-    /// @brief Compute the distance between origin and this point
+    /// @brief Computes the distance between origin and this point
     /// @param origin (optional) Its value is set to p(0,0,0) by default
     Math::Point3DValue length(void) const;
-    /// @brief Compute the distance between origin and this point
+    /// @brief Computes the distance between origin and this point
     /// @param origin (optional) Its value is set to p(0,0,0) by default
     Math::Point3DValue length(Math::Point3D const &origin) const;
 };

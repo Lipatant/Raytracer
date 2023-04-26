@@ -14,6 +14,9 @@
 namespace Raytracer {
 
 class Scene {
+private:
+    Raytracer::Color _renderAtOnce(Raytracer::Ray ray, \
+        Raytracer::HitPointList hitPointList, bool &variated);
 public: // Main Attributes
     std::list<Shape::Shape> shapes;
     Raytracer::Camera camera;
@@ -22,7 +25,7 @@ public:
     Raytracer::Display render(void);
     Raytracer::DisplayPixel renderAt(std::size_t const x, std::size_t const y);
     Raytracer::Color renderFromList(Raytracer::HitPointList hitPointList, \
-        Raytracer::Color light, std::size_t const recurrence);
+        Raytracer::Color light, std::size_t const recurrence, bool &variated);
     //
 //    void operator<<(Shape::Shape &shape);
 };
