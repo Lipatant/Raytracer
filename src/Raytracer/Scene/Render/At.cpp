@@ -56,7 +56,7 @@ static Raytracer::ColorValue randomColorValue(void)
 
 static Raytracer::Color getSkyBox(void)
 {
-    return Raytracer::Color(0.6, 0.9, 1.0, 0.1).withoutAlpha();
+    return Raytracer::Color(0.6, 0.9, 1.0, 0.2).withoutAlpha();
 }
 
 Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
@@ -119,7 +119,7 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
     Raytracer::CameraDirection cameraDirection(getDirection(camera, x, y));
     Raytracer::Ray ray(cameraDirection, camera.position);
     Raytracer::HitPointList hitPointList = rayListCollisions(ray);
-    std::size_t blending = 10;
+    std::size_t blending = 1000;
     bool needBlend = false;
 
     if (blending <= 0)

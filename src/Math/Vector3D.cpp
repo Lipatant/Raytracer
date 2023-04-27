@@ -17,6 +17,8 @@ void Math::Vector3D::normalize(void)
 {
     double len = length();
 
+    if (len == 0)
+        return;
     x /= len;
     y /= len;
     z /= len;
@@ -86,7 +88,7 @@ Math::Vector3D Math::Vector3D::variation(FLAG_UNUSED double const centering, \
         randomVector = (randomVector * dotProductSign * (1 - \
             forcedCentering)) + (this->normalized() * (forcedCentering + \
             centering));
-    return randomVector.normalized();
+     return randomVector.normalized();
 }
 
 std::ostream &operator<<(std::ostream &stream, Math::Vector3D const &vector)

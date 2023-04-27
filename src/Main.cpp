@@ -29,8 +29,6 @@ int main(int const ac, char const * const * const av)
     Raytracer::Ray ray;
     Raytracer::Scene scene;
 
-    scene.camera.width = 1700;
-    scene.camera.height = 1000;
     scene.camera.width = 680;
     scene.camera.height = 400;
     scene.camera.position = Math::Point3D(0,0,0);
@@ -42,13 +40,13 @@ int main(int const ac, char const * const * const av)
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
         Math::Point3D(3,1,0.1), 0.8, Raytracer::Texture(Raytracer::Color(0, 1, 0))));
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
-        Math::Point3D(2.8,0,0.2), 0.4, Raytracer::Texture(Raytracer::Color(0.2, 0.2, 0.7, 0.5))));
+        Math::Point3D(2.8,0,0.2), 0.4, Raytracer::Texture(Raytracer::Color(0.8, 0.8, 1.0, 0.8), 0.65)));
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
-        Math::Point3D(7,-8,0), 8, Raytracer::Texture(Raytracer::Color(0.9, 0.9, 0.9), 0.9)));
+        Math::Point3D(7,-8,0), 8, Raytracer::Texture(Raytracer::Color(0.9, 0.9, 0.9), 0.4)));
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
-        Math::Point3D(7,12,0), 8, Raytracer::Texture(Raytracer::Color(0.9, 0.9, 0.6), 0.6)));
-    scene.shapes.push_back(Shape::createShape<Shape::Sphere>(
-        Math::Point3D(2.7,0,0.6), 0.5, Raytracer::Texture(Raytracer::Color(1.0, 0.9, 0.2, 1), Raytracer::Color(1.0, 0.9, 0.2, 1))));
+        Math::Point3D(7,12,0), 8, Raytracer::Texture(Raytracer::Color(0.9, 0.9, 0.6), 0.2)));
+    scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
+        Math::Point3D(2.7,0,0.6), 0.5, Raytracer::Texture(Raytracer::Color(1.0, 0.9, 0.2, 1), Raytracer::Color(1.0, 0.9, 0.2, 0.2))));
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
         Math::Point3D(2,0,-4.1), 3, Raytracer::Texture(Raytracer::Color(0, 0, 0, 0), Raytracer::Color(1, 1, 1, 0.4))));
     if (ac < 2)
