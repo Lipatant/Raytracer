@@ -6,6 +6,7 @@
 */
 
 #include <vector>
+#include "Argument/Extern.hpp"
 #include "Raytracer/Scene.hpp"
 
 static Raytracer::CameraDirection getDirection(Raytracer::Camera const \
@@ -65,9 +66,10 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
     Raytracer::Color color(1, 1, 1);
     Raytracer::Color light(0, 0, 0);
     Raytracer::Texture texture;
+    std::size_t rebound = Arg::INPUT.rebound;
 
     hitPointList.sort();
-    for (std::size_t i = 0; i < 10; i++) {
+    for (std::size_t i = 0; i < rebound; i++) {
         if (hitPointList.size() < 1) {
             light += getSkyBox() * color;
             return light;
@@ -120,7 +122,7 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
     Raytracer::CameraDirection cameraDirection(getDirection(camera, x, y));
     Raytracer::Ray ray(cameraDirection, camera.position);
     Raytracer::HitPointList hitPointList = rayListCollisions(ray);
-    std::size_t blending = 10;
+    std::size_t blending = Arg::INPUT.blending;
     bool needBlend = false;
 
     cameraDirection.normalize();

@@ -1,28 +1,28 @@
 /*
 ** EPITECH PROJECT, 2022
-** raytracer
+** Argument/Argument.hpp
 ** File description:
-** Argument.h
+** -
 */
 
-#ifndef ARGUMENT_H_
-    #define ARGUMENT_H
+#pragma once
+#include <iostream>
 
-    #include <iostream>
+namespace Arg {
 
-namespace Arg
-{
-    class Argument
-    {
-        public:
-            double fov = 90;
-            std::size_t width = 1920;
-            std::size_t height = 1080;
-            std::size_t rebound = 20;
-            std::size_t blending = 1;
-            void set_arguments(int, char* const*);
-            Argument(void);
-            ~Argument(void);
-    };
+class Argument {
+public:
+    double fov = 90;
+    std::size_t width = 680;
+    std::size_t height = 400;
+    std::size_t rebound = 10;
+    std::size_t blending = 1;
+    std::string out = "out.ppm";
+    //
+    Argument(void);
+    ~Argument(void) = default;
+    //
+    bool setArguments(int const, char const * const * const);
+};
+
 }
-#endif

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** raytracer
+** Argument/Argument/Constructor.cpp
 ** File description:
 ** Constructor.cpp
 */
@@ -8,11 +8,4 @@
 #include "Argument/Argument.hpp"
 
 Arg::Argument::Argument(void)
-{
-
-}
-
-Arg::Argument::~Argument(void)
-{
-
-}
+{ }
