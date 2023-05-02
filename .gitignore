@@ -6,9 +6,11 @@
 *~
 *.o
 *.pdf
+*.ppm
+
+out.*
 logs*.txt
 test*.txt
-*.ppm
 
 build/
 docs/

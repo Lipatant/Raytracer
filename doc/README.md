@@ -2,7 +2,7 @@
 
 The repository for the project Raytracer.
 
-![picture Raytracer](pictureReadme/pictureRaytracer.jpg)
+![picture Raytracer](raytracer.gif)
 
 ---  
 
