@@ -15,20 +15,32 @@
 
 void Math::Vector3D::normalize(void)
 {
-    double len = length();
+    double len;
 
+    if (x == _normalizedX && y == _normalizedY && z == _normalizedZ)
+        return;
+    len = length();
     if (len == 0)
         return;
     x /= len;
     y /= len;
     z /= len;
+    _normalizedX = x;
+    _normalizedY = y;
+    _normalizedZ = z;
 }
 
 Math::Vector3D Math::Vector3D::normalized(void) const
 {
     Math::Vector3D vector(*this);
 
-    vector.normalize();
+    if (x == _normalizedX && y == _normalizedY && z == _normalizedZ) {
+        vector._normalizedX = x;
+        vector._normalizedY = y;
+        vector._normalizedZ = z;
+    } else {
+        vector.normalize();
+    }
     return vector;
 }
 

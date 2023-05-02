@@ -102,6 +102,7 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
                     texture.mirrorValue) + reflectMirror(ray.direction, \
                     hitPointList.front().reflect) * texture.mirrorValue;
         }
+        ray.direction.normalize();
         hitPointList = rayListCollisions(ray);
         hitPointList.sort();
     }
@@ -119,9 +120,10 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
     Raytracer::CameraDirection cameraDirection(getDirection(camera, x, y));
     Raytracer::Ray ray(cameraDirection, camera.position);
     Raytracer::HitPointList hitPointList = rayListCollisions(ray);
-    std::size_t blending = 10;
+    std::size_t blending = 20;
     bool needBlend = false;
 
+    cameraDirection.normalize();
     if (blending <= 0)
         return color.toDisplayPixel();
     for (size_t i = 0; i < blending; i++) {

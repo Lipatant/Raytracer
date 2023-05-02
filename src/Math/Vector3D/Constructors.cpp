@@ -23,5 +23,7 @@ Math::Vector3D::Vector3D(Math::Point3D const &point) :
 
 Math::Vector3D::Vector3D(Vector3D const &other) :
     Point3D(static_cast<Math::Point3DValue>(other.x), static_cast \
-    <Math::Point3DValue>(other.y), static_cast<Math::Point3DValue>(other.z))
+    <Math::Point3DValue>(other.y), static_cast<Math::Point3DValue>(other.z)), \
+    _normalizedX(other._normalizedX), _normalizedY(other._normalizedY), \
+    _normalizedZ(other._normalizedZ)
 { }

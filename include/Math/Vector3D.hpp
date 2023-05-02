@@ -15,6 +15,10 @@ using Vector3DValue = double;
 
 class Vector3D : public Math::Point3D
 {
+private:
+    Math::Point3DValue _normalizedX = 1;
+    Math::Point3DValue _normalizedY = 0;
+    Math::Point3DValue _normalizedZ = 0;
 public:
     using Point3D::Point3D;
     //
