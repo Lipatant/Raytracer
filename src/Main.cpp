@@ -13,7 +13,7 @@
 #include "Raytracer.hpp"
 #include "Shape.hpp"
 
-#define DEFAULT_MIRROR_CUBE 0.9
+#define DEFAULT_MIRROR_CUBE 1.0
 
 Arg::Argument Arg::INPUT;
 

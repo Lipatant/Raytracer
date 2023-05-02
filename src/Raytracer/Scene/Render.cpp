@@ -53,12 +53,15 @@ static void displayDuration(std::ostream &stream, StaticHere::DisplayDuration \
 
 void StaticHere::Display::display(std::ostream &stream) const
 {
-    double percent = static_cast<double>(_actual + 1) / _maximum;
+    double percent = static_cast<double>(_actual) / _maximum;
 
     stream << static_cast<std::size_t>(percent * 100) << "% | ";
     displayDuration(stream, _duration);
     stream << " / ";
-    displayDuration(stream, _duration / percent);
+    if (_duration > 0)
+        displayDuration(stream, _duration / percent);
+    else
+        stream << "?s";
     stream << " | " <<_actual + 1 << " / " << _maximum << " | ";
 }
 
