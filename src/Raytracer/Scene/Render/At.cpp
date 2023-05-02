@@ -67,7 +67,7 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
     Raytracer::Texture texture;
 
     hitPointList.sort();
-    for (std::size_t i = 0; i < 20; i++) {
+    for (std::size_t i = 0; i < 10; i++) {
         if (hitPointList.size() < 1) {
             light += getSkyBox() * color;
             return light;
@@ -119,7 +119,7 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
     Raytracer::CameraDirection cameraDirection(getDirection(camera, x, y));
     Raytracer::Ray ray(cameraDirection, camera.position);
     Raytracer::HitPointList hitPointList = rayListCollisions(ray);
-    std::size_t blending = 1000;
+    std::size_t blending = 10;
     bool needBlend = false;
 
     if (blending <= 0)

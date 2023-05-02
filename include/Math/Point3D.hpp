@@ -44,6 +44,12 @@ public:
     Point3D operator*(Math::Point3DValue const value) const;
     Point3D operator/(Math::Point3DValue const value) const;
     //
+    /// @brief Computes the cross product (produit vectoriel) of this point and
+    ///     another
+    Math::Point3D cross(Point3D const &other) const;
+    /// @brief Computes the cross product (produit vectoriel) of this point and
+    ///     another
+    Math::Point3D cross(Vector3D const &other) const;
     /// @brief Computes the dot product (produit scalaire) of this point and
     ///     another
     Math::Point3DValue dot(Point3D const &other) const;

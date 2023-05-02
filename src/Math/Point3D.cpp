@@ -9,6 +9,24 @@
 #include "Math/Vector3D.hpp"
 #include <cmath>
 
+Math::Point3D Math::Point3D::cross(Math::Point3D const &other) const
+{
+    return (Math::Point3D(
+        y * other.z - z * other.y,
+        x * other.z - z * other.x,
+        x * other.y - y * other.x
+    ));
+}
+
+Math::Point3D Math::Point3D::cross(Math::Vector3D const &other) const
+{
+    return (Math::Point3D(
+        y * other.z - z * other.y,
+        x * other.z - z * other.x,
+        x * other.y - y * other.x
+    ));
+}
+
 Math::Point3DValue Math::Point3D::dot(Math::Point3D const &other) const
 {
     return (x * other.x + y * other.y + z * other.z);

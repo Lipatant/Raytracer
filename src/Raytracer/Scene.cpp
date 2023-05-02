@@ -14,7 +14,7 @@ Raytracer::HitPointList Raytracer::Scene::rayListCollisions(Raytracer::Ray \
 
     for (auto const &shape: shapes)
         for (auto const &hitpoint: shape->hitPoints(ray))
-            if (hitpoint.distance >= 0.001)
+            if (hitpoint.distance >= 0.0001)
                 hitPointList.push_back(hitpoint);
     hitPointList.sort();
     return hitPointList;
