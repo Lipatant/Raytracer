@@ -120,7 +120,7 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
     Raytracer::CameraDirection cameraDirection(getDirection(camera, x, y));
     Raytracer::Ray ray(cameraDirection, camera.position);
     Raytracer::HitPointList hitPointList = rayListCollisions(ray);
-    std::size_t blending = 1;
+    std::size_t blending = 10;
     bool needBlend = false;
 
     cameraDirection.normalize();

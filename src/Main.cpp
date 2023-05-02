@@ -11,6 +11,7 @@
 #include "Math.hpp"
 #include "Raytracer.hpp"
 #include "Shape.hpp"
+#include "Argument/Argument.hpp"
 
 static void writeFile(std::string const &filepath, Raytracer::Display const \
     &display)
@@ -24,11 +25,13 @@ static void writeFile(std::string const &filepath, Raytracer::Display const \
     file.close();
 }
 
-int main(int const ac, char const * const * const av)
+int main(int const ac, char * const * const av)
 {
     Raytracer::Ray ray;
     Raytracer::Scene scene;
+    Arg::Argument as;
 
+    as.set_arguments(ac, av);
     scene.camera.width = 680;
     scene.camera.height = 400;
     scene.camera.position = Math::Point3D(0,0,0);
