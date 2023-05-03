@@ -6,7 +6,6 @@
 *~
 *.o
 *.pdf
-*.ppm
 
 out.*
 logs*.txt
