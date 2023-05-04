@@ -22,8 +22,7 @@ namespace Parser
         Model() = default;
         ~Model() = default;
         openFile(std::string);
-        void stockValue(void);
+        void stockValue(std::string line);
     };
 }
-
 //string ou on envoye les forme , sph (int)x y z, tri (int)x y z, pla (int)x y z,

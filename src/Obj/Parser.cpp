@@ -10,9 +10,14 @@
 #include <string>
 #include "../include/Obj/Parser.hpp"
 
-void stockValue(void) //stocker le nom de la forme x y z
+void stockValue(std::string line) //stocker le nom de la forme x y z
 {
-    return;
+    //std::string name, a, b, c; je suis pas sur mais je pense que ca marche
+    //ss >> name >> a >> b >> c; je suis pas sur mais je pense que ca marche
+    //x = stoi(a);     faire ca avec la struture
+    //y = stoi(b);     faire ca avec la struture
+    //z = stoi(c);     faire ca avec la struture
+    //formName = name; faire ca avec la struture
 }
 
 int openFile(std::string filepath)
@@ -24,18 +29,12 @@ int openFile(std::string filepath)
         std::cerr << "Error the file is not open" << std::endl;
         return 84;
     }
+    if (!getline(file, line)) {
+        std::cerr << "The file is empty" << std::endl;
+        return 84;
+    }
     while(std::getline(file, line))
-        std::string name, a, b, c;
-        ss >> name >> a >> b >> c;
-        Model.x = stoi(a);
-        Model.y = stoi(b);
-        Model.z = stoi(c);
-        Model.formName = name;
-    file.close;
+        stockValue(line)
+    file.close();
     return 0;
 }
-
-//sphère xyz, un double, texture(rgb, rgba)
-//triangle
-//plane
-//angle cam
