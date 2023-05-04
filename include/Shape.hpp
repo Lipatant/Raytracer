@@ -10,3 +10,4 @@
 #include "Shape/IShape.hpp"
 #include "Shape/Plane.hpp"
 #include "Shape/Sphere.hpp"
+#include "Shape/Triangle.hpp"

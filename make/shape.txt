@@ -2,3 +2,4 @@ Shape/AShape.cpp
 Shape/IShape.cpp
 Shape/Plane.cpp
 Shape/Sphere.cpp
+Shape/Triangle.cpp

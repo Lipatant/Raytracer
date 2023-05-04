@@ -38,14 +38,14 @@ Raytracer::HitPointList Shape::Plane::hitPoints(Raytracer::Ray const &ray) \
 {
     Math::Vector3D normal = Math::Vector3D(_u.cross(_v)).normalized();
     double divisor = ray.direction.dot(normal);
-    double discriminent = 0;
+    double distance = 0;
 
     if (divisor == 0) {
         if ((_origin + _u - ray.origin).dot(normal) == 0)
             return {Raytracer::HitPoint(0.0, ray.origin, _texture, normal)};
         return {};
     }
-    discriminent = (_origin + _u - ray.origin).dot(normal) / divisor;
-    return {Raytracer::HitPoint(discriminent, ray.origin + \
-        ray.direction.normalized() * discriminent, _texture, normal)};
+    distance = (_origin + _u - ray.origin).dot(normal) / divisor;
+    return {Raytracer::HitPoint(distance, ray.origin + \
+        ray.direction.normalized() * distance, _texture, normal)};
 }

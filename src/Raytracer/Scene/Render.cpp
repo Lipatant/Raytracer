@@ -62,7 +62,7 @@ void StaticHere::Display::display(std::ostream &stream) const
         displayDuration(stream, _duration / percent);
     else
         stream << "?s";
-    stream << " | " <<_actual + 1 << " / " << _maximum << " | ";
+    stream << " | " <<_actual + 1 << " / " << _maximum;
 }
 
 std::ostream &operator<<(std::ostream &stream, StaticHere::Display const \
