@@ -6,9 +6,11 @@
 */
 
 #include <fstream>
+#include <sstream>
+#include <string>
 #include "../include/Obj/Parser.hpp"
 
-void stockValue() //stocker le nom de la forme x y z
+void stockValue(void) //stocker le nom de la forme x y z
 {
     return;
 }
@@ -22,8 +24,13 @@ int openFile(std::string filepath)
         std::cerr << "Error the file is not open" << std::endl;
         return 84;
     }
-    while(std::getline(file, line))     //modifié ca parce que ca print ca fait que print
-        std::cout << line << std::endl; //modifié ca parce que ca print ca fait que print
+    while(std::getline(file, line))
+        std::string name, a, b, c;
+        ss >> name >> a >> b >> c;
+        Model.x = stoi(a);
+        Model.y = stoi(b);
+        Model.z = stoi(c);
+        Model.formName = name;
     file.close;
     return 0;
 }
