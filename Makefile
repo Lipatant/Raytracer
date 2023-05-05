@@ -10,6 +10,7 @@ SRC	=	$(shell cat make/math.txt | tr '\n' ' ')							\
 		$(shell cat make/utility.txt | tr '\n' ' ')							\
 		$(shell cat make/raytracer.txt | tr '\n' ' ')						\
 		$(shell cat make/arguments.txt | tr '\n' ' ')						\
+		$(shell cat make/parser.txt | tr '\n' ' ')							\
 
 BUILDDIR = build
 

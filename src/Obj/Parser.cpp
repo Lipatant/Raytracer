@@ -40,10 +40,11 @@ int Parser::Model::openFile(std::string filepath)
         std::cerr << "The file is empty" << std::endl;
         return 84;
     }
-    while(std::getline(file, line))
+    while(std::getline(file, line)) {
         if (line[0] == '#' || line[0] == '/')
             continue;
         stockValue(line);
+    }
     file.close();
     return 0;
 }
