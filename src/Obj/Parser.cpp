@@ -34,6 +34,8 @@ int openFile(std::string filepath)
         return 84;
     }
     while(std::getline(file, line))
+        if (line[0] == '#' or line[0] == '/')
+            continue;
         stockValue(line)
     file.close();
     return 0;
