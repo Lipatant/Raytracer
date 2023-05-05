@@ -21,7 +21,7 @@ namespace Parser
     public:
         Model() = default;
         ~Model() = default;
-        openFile(std::string);
+        int openFile(std::string);
         void stockValue(std::string line);
     };
 }
