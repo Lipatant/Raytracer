@@ -10,8 +10,22 @@
 #include <string>
 #include "../include/Obj/Parser.hpp"
 
+Parser::File::File(void)
+{
+
+}
+
+Parser::File::~File(void)
+{
+
+}
+
 void Parser::Model::stockValue(std::string line)
 {
+    if (line.empty()) {
+        std::cerr << "Error: empty line passed to stockValue" << std::endl;
+        return;
+    }
     std::stringstream ss(line);
     std::string tmp;
 
@@ -22,29 +36,34 @@ void Parser::Model::stockValue(std::string line)
     y = stoi(tmp);
     ss >> tmp;
     z = stoi(tmp);
-    ss >> tmp;
-    if (tmp.length() != 0)
-        exit(84);
 }
 
-int Parser::Model::openFile(std::string filepath)
+static Parser::Model new_element(std::string line)
+{
+    Parser::Model newmodel;
+
+    newmodel.stockValue(line);
+    return newmodel;
+}
+
+void Parser::File::openFile(std::string filepath)
 {
     std::ifstream file(filepath);
-    std::string line = NULL;
+    std::string line;
 
     if (!file.is_open()) {
-        std::cerr << "Error the file is not open" << std::endl;
-        return 84;
+        std::cerr << "Error: the file is not open" << std::endl;
+        return;
     }
     if (!std::getline(file, line)) {
-        std::cerr << "The file is empty" << std::endl;
-        return 84;
+        std::cerr << "Error: the file is empty" << std::endl;
+        return;
     }
+    shapes.push_back(new_element(line));
     while(std::getline(file, line)) {
-        if (line[0] == '#' || line[0] == '/')
+        if (line.empty() || line[0] == '#' || line[0] == '/')
             continue;
-        stockValue(line);
+        shapes.push_back(new_element(line));
     }
     file.close();
-    return 0;
 }

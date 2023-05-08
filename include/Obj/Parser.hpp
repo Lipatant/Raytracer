@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <vector>
 
 #pragma once
 
@@ -13,7 +14,7 @@ namespace Parser
 {
     class Model
     {
-    private:
+    public:
         int x = 0;
         int y = 0;
         int z = 0;
@@ -21,8 +22,14 @@ namespace Parser
     public:
         Model() = default;
         ~Model() = default;
-        int openFile(std::string);
         void stockValue(std::string line);
+    };
+    class File {
+        public:
+            File();
+            ~File();
+            std::vector<Parser::Model> shapes;
+            void openFile(std::string);
     };
 }
 //string ou on envoye les forme , sph (int)x y z, tri (int)x y z, pla (int)x y z,
