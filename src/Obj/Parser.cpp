@@ -20,7 +20,7 @@ Parser::File::~File(void)
 
 }
 
-void Parser::Model::stockValue(std::string line)
+void Parser::Model::stockValue(const std::string line)
 {
     if (line.empty()) {
         std::cerr << "Error: empty line passed to stockValue" << std::endl;
@@ -30,6 +30,10 @@ void Parser::Model::stockValue(std::string line)
     std::string tmp;
 
     ss >> formName;
+    if (FIGURES.find(formName) == FIGURES.end()) {
+        std::cerr << "Error: invalid value in file: " << formName << std::endl;
+        exit(84);
+    }
     ss >> tmp;
     x = stoi(tmp);
     ss >> tmp;
@@ -38,7 +42,7 @@ void Parser::Model::stockValue(std::string line)
     z = stoi(tmp);
 }
 
-static Parser::Model new_element(std::string line)
+static Parser::Model new_element(const std::string line)
 {
     Parser::Model newmodel;
 
@@ -46,7 +50,7 @@ static Parser::Model new_element(std::string line)
     return newmodel;
 }
 
-void Parser::File::openFile(std::string filepath)
+void Parser::File::parseFile(const std::string filepath)
 {
     std::ifstream file(filepath);
     std::string line;
