@@ -22,7 +22,7 @@ $(BUILDDIR)/%.o: 	src/%.cpp
 
 NAME	=	raytracer
 
-LDFLAGS	=
+LDFLAGS	=	-lconfig++
 
 IDIR	=	include
 
