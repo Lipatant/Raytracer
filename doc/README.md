@@ -4,7 +4,7 @@ The repository for the project Raytracer.
 
 ![picture Raytracer](raytracer.gif)
 
----  
+---
 
 ## 2. How to launch
 
@@ -15,14 +15,17 @@ To run the project:
 > ./raytracer <SCENE_FILE>
 ```
 
----  
+---
 
 ## 3. The purpose of the project
 
-Ray tracing is a technique used to generate realistic digital images by simulating the inverse path of light.
+Raytracing is a 3D rendering technique used in computer graphics. This technique consists
+of simulating the propagation of light in a virtual scene by tracing light rays from the
+camera or a light source and calculating their interaction with the objects in the scene.
+The result is a realistic image with very realistic light effects, reflections, refractions and shadows.
 Your goal is to create a program able to generate an image from a file describing the scene.
 
----  
+---
 
 ## 4. People on the project
 
