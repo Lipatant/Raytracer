@@ -20,66 +20,55 @@ Parser::File::~File(void)
 
 }
 
-void Parser::Model::stockValue(const std::string line)
+Parser::Model Parser::File::new_element(const libconfig::Setting& shape)
 {
-    if (line.empty()) {
-        std::cerr << "Error: empty line passed to stockValue" << std::endl;
-        return;
-    }
-    std::stringstream ss(line);
-    std::string tmp;
+    Parser::Model model;
+    std::string shapename;
+    int tmp;
 
-    ss >> formName;
-    if (FIGURES.find(formName) == FIGURES.end()) {
-        std::cerr << "Error: invalid value in file: " << formName << std::endl;
-        exit(84);
+    shape.lookupValue("shape", shapename);
+    model.formName = shapename;
+    shape.lookupValue("x", tmp);
+    model.x = tmp;
+    shape.lookupValue("y", tmp);
+    model.y = tmp;
+    shape.lookupValue("z", tmp);
+    model.z = tmp;
+    shape.lookupValue("width", tmp);
+    model.width = tmp;
+    shape.lookupValue("height", tmp);
+    model.height = tmp;
+    shape.lookupValue("r", tmp);
+    model.r = tmp;
+    shape.lookupValue("g", tmp);
+    model.g = tmp;
+    shape.lookupValue("b", tmp);
+    model.b = tmp;
+    return model;
+}
+
+void Parser::File::generate_scene(libconfig::Config &cfg)
+{
+    const libconfig::Setting& s = cfg.lookup("scene.shapes");
+
+    for (int i = 0; i < s.getLength(); ++i) {
+        const libconfig::Setting& shape = s[i];
+        shapes.push_back(new_element(shape));
     }
-    if (!(ss >> tmp)) {
-        std::cerr << "Error: invalid value" << std::endl;
-        exit(84);
-    }
+}
+
+void Parser::File::parseFile(const char *filepath)
+{
+    libconfig::Config cfg;
+
     try {
-        ss >> tmp;
-        x = stoi(tmp);
-        ss >> tmp;
-        y = stoi(tmp);
-        ss >> tmp;
-        z = stoi(tmp);
-    } catch (const std::invalid_argument& e) {
-        std::cerr << "Error: invalid argument of stoi" << std::endl;
+        cfg.readFile(filepath);
+    } catch(const libconfig::FileIOException &fio) {
+        std::cerr << "Error reading" << std::endl;
         exit(84);
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Error: out of range" << std::endl;
+    } catch(const libconfig::ParseException &pex) {
+        std::cerr << "Error parsing" << std::endl;
         exit(84);
     }
-}
-
-static Parser::Model new_element(const std::string line)
-{
-    Parser::Model newmodel;
-
-    newmodel.stockValue(line);
-    return newmodel;
-}
-
-void Parser::File::parseFile(const std::string filepath)
-{
-    std::ifstream file(filepath);
-    std::string line;
-
-    if (!file.is_open()) {
-        std::cerr << "Error: the file is not open" << std::endl;
-        return;
-    }
-    if (!std::getline(file, line)) {
-        std::cerr << "Error: the file is empty" << std::endl;
-        return;
-    }
-    shapes.push_back(new_element(line));
-    while(std::getline(file, line)) {
-        if (line.empty() || line[0] == '#' || line[0] == '/')
-            continue;
-        shapes.push_back(new_element(line));
-    }
-    file.close();
+    generate_scene(cfg);
 }

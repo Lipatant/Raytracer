@@ -8,6 +8,9 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <iostream>
+#include <stdlib.h>
+#include <libconfig.h++>
 
 #pragma once
 
@@ -19,18 +22,23 @@ namespace Parser
         int x = 0;
         int y = 0;
         int z = 0;
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        int width = 0;
+        int height = 0;
         std::string formName;
-    public:
         Model() = default;
         ~Model() = default;
-        void stockValue(const std::string);
     };
     class File {
         public:
             File();
             ~File();
             std::vector<Parser::Model> shapes;
-            void parseFile(const std::string);
+            void parseFile(const char *);
+            Parser::Model new_element(const libconfig::Setting& shape);
+            void generate_scene(libconfig::Config &cfg);
     };
 }
 
