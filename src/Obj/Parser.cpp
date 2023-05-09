@@ -34,12 +34,24 @@ void Parser::Model::stockValue(const std::string line)
         std::cerr << "Error: invalid value in file: " << formName << std::endl;
         exit(84);
     }
-    ss >> tmp;
-    x = stoi(tmp);
-    ss >> tmp;
-    y = stoi(tmp);
-    ss >> tmp;
-    z = stoi(tmp);
+    if (!(ss >> tmp)) {
+        std::cerr << "Error: invalid value" << std::endl;
+        exit(84);
+    }
+    try {
+        ss >> tmp;
+        x = stoi(tmp);
+        ss >> tmp;
+        y = stoi(tmp);
+        ss >> tmp;
+        z = stoi(tmp);
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Error: invalid argument of stoi" << std::endl;
+        exit(84);
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Error: out of range" << std::endl;
+        exit(84);
+    }
 }
 
 static Parser::Model new_element(const std::string line)
