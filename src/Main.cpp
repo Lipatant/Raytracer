@@ -34,12 +34,7 @@ int main(int const ac, char * const * const av)
 {
     Raytracer::Ray ray;
     Raytracer::Scene scene;
-    Parser::File file;
 
-    file.parseFile(av[1]);
-    for (auto const &val: file.shapes)
-        std::cout << val.formName << std::endl;
-    return 0;
     if (!Arg::INPUT.setArguments(ac, av))
         return 84;
     scene.camera.width = Arg::INPUT.width;
