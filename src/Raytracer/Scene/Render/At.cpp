@@ -86,7 +86,6 @@ Raytracer::Color Raytracer::Scene::_renderPureLight(Raytracer::HitPointList \
             color *= invertedAlphaColor(texture.color).withoutAlpha();
         hitPointList.pop_front();
     }
-    light += getSkyBox() * color;
     return light;
 }
 
@@ -104,7 +103,8 @@ void Raytracer::Scene::_renderPureLighting(Raytracer::Ray ray, \
             dotProduct = incommingDirection.dot(ray.direction);
             if (dotProduct < 0)
                 continue;
-            pureLightColor = _renderPureLight(rayListPureLights(ray)) * dotProduct;
+            pureLightColor = _renderPureLight(rayListPureLights(ray)) * \
+                dotProduct;
             light = pureLightColor.withoutAlpha() * color.withoutAlpha();
         }
     }
@@ -156,7 +156,8 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
         }
         ray.direction.normalize();
         light += texture.light.withoutAlpha() * color.withoutAlpha();
-        _renderPureLighting(ray, color, light);
+        _renderPureLighting(Raytracer::Ray(ray.origin, \
+            hitPointList.front().reflect), color, light);
         color *= texture.color.withoutAlpha();
         hitPointList = rayListCollisions(ray);
         hitPointList.sort();
