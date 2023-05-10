@@ -34,14 +34,8 @@ Raytracer::HitPointList Shape::AmbientLight::hitPoints(Raytracer::Ray const \
 {
     Raytracer::Texture texture(_texture);
     Math::Vector3D inbetween(_center - ray.origin);
-    Math::Point3DValue dotProduct(inbetween.normalized().dot( \
-        ray.direction.normalized()));
 
-    if (dotProduct < 0)
-        return {};
     texture.isPureLight = true;
-    texture.color.a *= dotProduct;
-    texture.light.a *= dotProduct;
     return {Raytracer::HitPoint(inbetween.length(), _center, texture, \
         inbetween * -1)};
 }

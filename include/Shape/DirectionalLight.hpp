@@ -6,25 +6,29 @@
 */
 
 #pragma once
-#include "Shape/Sphere.hpp"
+#include "Shape/AShape.hpp"
 
 namespace Shape {
 
-class DirectionalLight : public Sphere {
+using DirectionalLightFOI = double;
+
+class DirectionalLight : public AShape {
 protected:
+    Math::Point3D _center;
     Math::Vector3D _direction;
+    DirectionalLightFOI _foi; // Field of illumination
 public:
     DirectionalLight(Math::Point3D const center, Math::Vector3D const \
-        direction, Math::Vector3DValue const radius);
+        direction, double const foi);
     DirectionalLight(Math::Point3D const center, Math::Vector3D const \
-        direction, Math::Vector3DValue const radius, Raytracer::Color const \
-        &color);
+        direction, double const foi, Raytracer::Color const &color);
     DirectionalLight(Math::Point3D const center, Math::Vector3D const \
-        direction, Math::Vector3DValue const radius, Raytracer::Texture \
-        const &texture);
+        direction, double const foi, Raytracer::Texture const &texture);
     //
     Raytracer::HitPointList hitPoints(Raytracer::Ray const &ray) const \
         override;
+    //
+    Math::Point3D getCenter(void) const override;
 };
 
 }
