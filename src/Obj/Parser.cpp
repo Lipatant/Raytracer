@@ -20,31 +20,50 @@ Parser::File::~File(void)
 
 }
 
-Parser::Model Parser::File::new_element(const libconfig::Setting& shape)
-{
-    Parser::Model model;
-    std::string shapename;
-    int tmp;
+//  dans tous
+//      shape
+//      x
+//      y
+//      z
+//      soit
+//          Textr
+//          Textg
+//          Textb
+//          Texta
+//      soit
+//          Text1r
+//          Text1g
+//          Text1b
+//          Text1a
+//          Text2r
+//          Text2g
+//          Text2b
+//          Text2a
 
-    shape.lookupValue("shape", shapename);
-    model.formName = shapename;
-    shape.lookupValue("x", tmp);
-    model.x = tmp;
-    shape.lookupValue("y", tmp);
-    model.y = tmp;
-    shape.lookupValue("z", tmp);
-    model.z = tmp;
-    shape.lookupValue("width", tmp);
-    model.width = tmp;
-    shape.lookupValue("height", tmp);
-    model.height = tmp;
-    shape.lookupValue("r", tmp);
-    model.r = tmp;
-    shape.lookupValue("g", tmp);
-    model.g = tmp;
-    shape.lookupValue("b", tmp);
-    model.b = tmp;
-    return model;
+//  sphere
+//      idk
+
+//  plane
+//          vectx1
+//          vecty1
+//          vectz1
+//          vectx2
+//          vecty2
+//          vectz2
+//          idk2
+
+//  triangle
+//          x1
+//          y1
+//          z1
+//          x2
+//          y2
+//          z2
+//          idk2
+
+void Parser::File::new_element(const libconfig::Setting& shape)
+{
+//    shape.lookupValue("shape", model.formName);
 }
 
 void Parser::File::generate_scene(libconfig::Config &cfg)
@@ -53,7 +72,7 @@ void Parser::File::generate_scene(libconfig::Config &cfg)
 
     for (int i = 0; i < s.getLength(); ++i) {
         const libconfig::Setting& shape = s[i];
-        shapes.push_back(new_element(shape));
+        new_element(shape);
     }
 }
 

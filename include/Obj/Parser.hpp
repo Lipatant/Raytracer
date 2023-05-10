@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <map>
-#include <vector>
+#include "Shape.hpp"
 #include <iostream>
 #include <stdlib.h>
 #include <libconfig.h++>
@@ -16,28 +16,31 @@
 
 namespace Parser
 {
-    class Model
-    {
-    public:
-        int x = 0;
-        int y = 0;
-        int z = 0;
-        int r = 0;
-        int g = 0;
-        int b = 0;
-        int width = 0;
-        int height = 0;
-        std::string formName;
-        Model() = default;
-        ~Model() = default;
-    };
     class File {
         public:
+            std::string shape;
+            int x;
+            int y;
+            int z;
+//      soit
+//          Textr
+//          Textg
+//          Textb
+//          Texta
+//      soit
+//          Text1r
+//          Text1g
+//          Text1b
+//          Text1a
+//          Text2r
+//          Text2g
+//          Text2b
+//          Text2a
             File();
             ~File();
-            std::vector<Parser::Model> shapes;
+            std::list<Shape::Shape> shapes;
             void parseFile(const char *);
-            Parser::Model new_element(const libconfig::Setting& shape);
+            void new_element(const libconfig::Setting& shape);
             void generate_scene(libconfig::Config &cfg);
     };
 }
