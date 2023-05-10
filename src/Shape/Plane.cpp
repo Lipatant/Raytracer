@@ -36,8 +36,9 @@ Shape::Plane::Plane(Math::Point3D const a, Math::Point3D const b, \
 Raytracer::HitPointList Shape::Plane::hitPoints(Raytracer::Ray const &ray) \
     const
 {
+    Math::Vector3D direction = ray.direction.normalized();
     Math::Vector3D normal = Math::Vector3D(_u.cross(_v)).normalized();
-    double divisor = ray.direction.dot(normal);
+    double divisor = direction.dot(normal);
     double distance = 0;
 
     if (divisor == 0) {
@@ -46,6 +47,10 @@ Raytracer::HitPointList Shape::Plane::hitPoints(Raytracer::Ray const &ray) \
         return {};
     }
     distance = (_origin + _u - ray.origin).dot(normal) / divisor;
+    if (divisor > 0) {
+        return {Raytracer::HitPoint(distance, ray.origin + \
+            direction * distance, _texture, normal * -1)};
+    }
     return {Raytracer::HitPoint(distance, ray.origin + \
-        ray.direction.normalized() * distance, _texture, normal)};
+        direction * distance, _texture, normal)};
 }

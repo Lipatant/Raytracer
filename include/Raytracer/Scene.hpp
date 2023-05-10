@@ -17,10 +17,14 @@ class Scene {
 private:
     Raytracer::Color _renderAtOnce(Raytracer::Ray ray, \
         Raytracer::HitPointList hitPointList, bool &variated);
+    void _renderPureLighting(Raytracer::Ray ray, Raytracer::Color const \
+        &color, Raytracer::Color &light);
+    Raytracer::Color _renderPureLight(Raytracer::HitPointList hitPointList);
 public: // Main Attributes
     std::list<Shape::Shape> shapes;
     Raytracer::Camera camera;
 public:
+    Raytracer::HitPointList rayListPureLights(Raytracer::Ray const &ray);
     Raytracer::HitPointList rayListCollisions(Raytracer::Ray const &ray);
     Raytracer::Display render(void);
     Raytracer::DisplayPixel renderAt(std::size_t const x, std::size_t const y);

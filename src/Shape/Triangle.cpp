@@ -15,13 +15,25 @@ Shape::Triangle::Triangle(Math::Point3D const a, Math::Point3D const b, \
 { }
 
 Shape::Triangle::Triangle(Math::Point3D const a, Math::Point3D const b, \
+    Math::Point3D const c, bool const front, bool const back) : \
+    AShape(SHAPE_TRIANGLE_NAME), _a(a), _b(b), _c(c), _front(front), \
+    _back(back)
+{ }
+
+Shape::Triangle::Triangle(Math::Point3D const a, Math::Point3D const b, \
     Math::Point3D const c, Raytracer::Texture const &texture) : \
     AShape(SHAPE_TRIANGLE_NAME, texture), _a(a), _b(b), _c(c)
 { }
 
+Shape::Triangle::Triangle(Math::Point3D const a, Math::Point3D const b, \
+    Math::Point3D const c, bool const front, bool const back, \
+    Raytracer::Texture const &texture) : \
+    AShape(SHAPE_TRIANGLE_NAME, texture), _a(a), _b(b), _c(c), _front(front), \
+    _back(back)
+{ }
+
 #define vAB vectors[0]
 #define vAC vectors[1]
-//#define vBC vectors[2]
 
 // Möller–Trumbore intersection algorithm
 Raytracer::HitPointList Shape::Triangle::hitPoints(Raytracer::Ray const &ray) \
@@ -45,6 +57,6 @@ Raytracer::HitPointList Shape::Triangle::hitPoints(Raytracer::Ray const &ray) \
     if (u < 0.0 || v < 0.0 || (u + v) > 1.0)
         return {};
     distance = vOA.dot(normal) * f;
-    return {Raytracer::HitPoint(distance, ray.origin + ray.direction *
+    return {Raytracer::HitPoint(distance, ray.origin + ray.direction * \
         distance, _texture, normal.normalized())};
 }

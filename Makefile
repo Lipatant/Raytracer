@@ -25,7 +25,7 @@ LDFLAGS	=
 
 IDIR	=	include
 
-CPPFLAGS	=	-I$(IDIR) -I./include
+CPPFLAGS	=	-I./$(IDIR)
 
 CFLAGS	=	-W -Wall -Wextra
 
