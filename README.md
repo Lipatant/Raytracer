@@ -2,11 +2,22 @@
 
 The repository for the project Raytracer.
 
-![picture Raytracer](doc/raytracer.gif)
+![picture Raytracer](raytracer.gif)
 
----  
+---
 
-## 2. How to launch
+## 2. The purpose of the project
+
+Raytracing is a 3D rendering technique used in computer graphics. This technique consists
+of simulating the propagation of light in a virtual scene by tracing light rays from the
+camera or a light source and calculating their interaction with the objects in the scene.
+The result is a realistic image with very realistic light effects, reflections, refractions and shadows.
+Your goal is to create a program able to generate an image from a file describing the scene.
+
+
+---
+
+## 3. How to launch
 
 To run the project:
 
@@ -15,16 +26,50 @@ To run the project:
 > ./raytracer <SCENE_FILE>
 ```
 
----  
+---
 
-## 3. The purpose of the project
+## 4. How to use Raytracer
 
-Ray tracing is a technique used to generate realistic digital images by simulating the inverse path of light.
-Your goal is to create a program able to generate an image from a file describing the scene.
+To use Raytracer you need a configuration file like the following:
 
----  
+```
+/*example.cfg: An example configuration file that stores information about a store. */
 
-## 4. People on the project
+// Basic store information:
+
+// version
+//shape x y z width height r g b
+
+scene =
+{
+    shapes = (
+        {
+            shape = "sph"; // form
+            x = 10;        // position x in the scene
+            y = 11;        // position y in the scene
+            z = 12;        // position z in the scene
+            width = 10;    // width of the form
+            height = 10;   // height of the form
+            r = 155;       // rgb code
+            g = 255;       // rgb code
+            b = 255;       // rgb code
+        },
+        {
+            shape = "tri";
+            x = 10;
+            y = 10;
+            z = 10;
+            width = 10;
+            height = 10;
+            r = 155;
+            g = 255;
+            b = 255;
+        }
+    );
+};
+```
+
+## 5. People on the project
 
 | [<img src="https://github.com/Cyprien-nguyen-van-vien.png?size=85" width=85><br><sub>Cyprien Nguyen-Van-Vien</sub>](https://github.com/Cyprien-nguyen-van-vien) | [<img src="https://github.com/damienBC.png?size=85" width=85><br><sub>Damien Benais-Captal</sub>](https://github.com/damienBC) | [<img src="https://github.com/Pierrelouisleroy.png?size=85" width=85><br><sub>Pierre-Louis Leroy</sub>](https://github.com/Pierrelouisleroy) | [<img src="https://github.com/Lipatant.png?size=85" width=85><br><sub>Virgile Berrier</sub>](https://github.com/Lipatant)
 | :--: | :--: | :--: | :--: |
