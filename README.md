@@ -2,7 +2,7 @@
 
 The repository for the project Raytracer.
 
-![picture Raytracer](raytracer.gif)
+![picture Raytracer](doc/raytracer.gif)
 
 ---
 
