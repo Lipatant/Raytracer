@@ -20,47 +20,6 @@ Parser::File::~File(void)
 
 }
 
-//  dans tous
-//      shape
-//      x
-//      y
-//      z
-//      soit
-//          Textr
-//          Textg
-//          Textb
-//          Texta
-//      soit
-//          Text1r
-//          Text1g
-//          Text1b
-//          Text1a
-//          Text2r
-//          Text2g
-//          Text2b
-//          Text2a
-
-//  sphere
-//      idk
-
-//  plane
-//          vectx1
-//          vecty1
-//          vectz1
-//          vectx2
-//          vecty2
-//          vectz2
-//          idk2
-
-//  triangle
-//          x1
-//          y1
-//          z1
-//          x2
-//          y2
-//          z2
-//          idk2
-
 void Parser::File::new_element(const libconfig::Setting& shape)
 {
 //    shape.lookupValue("shape", model.formName);
