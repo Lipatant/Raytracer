@@ -43,6 +43,14 @@ static bool isColorAtMax(Raytracer::ColorValue const value)
     return (value >= Raytracer::ColorValueMaximum);
 }
 
+static Raytracer::Color invertedAlphaColor(Raytracer::Color const &color)
+{
+    Raytracer::Color newColor(color);
+
+    newColor.a = (0 - (color.a - 0.5)) + 0.5;
+    return newColor.normalized();
+}
+
 static Raytracer::RayDirection reflectMirror(Raytracer::RayDirection const \
     &direction, Raytracer::RayDirection const &reflect)
 {
@@ -60,6 +68,48 @@ static Raytracer::Color getSkyBox(void)
     return Raytracer::Color(0.6, 0.9, 1.0, 0.2).withoutAlpha();
 }
 
+Raytracer::Color Raytracer::Scene::_renderPureLight(Raytracer::HitPointList \
+    hitPointList)
+{
+    Raytracer::Color color(1, 1, 1);
+    Raytracer::Color light(0, 0, 0);
+    Raytracer::Texture texture;
+
+    hitPointList.sort();
+    while (!hitPointList.empty()) {
+        texture = hitPointList.front().texture;
+        if (texture.isPureLight)
+            light += texture.light.withoutAlpha() * color.withoutAlpha();
+        if (isColorAtMax(texture.color.a))
+            return light;
+        if (!isColorAtMin(texture.color.a))
+            color *= invertedAlphaColor(texture.color).withoutAlpha();
+        hitPointList.pop_front();
+    }
+    return light;
+}
+
+void Raytracer::Scene::_renderPureLighting(Raytracer::Ray ray, \
+    Raytracer::Color const &color, Raytracer::Color &light)
+{
+    Raytracer::RayDirection incommingDirection(ray.direction.normalized());
+    Raytracer::Color pureLightColor;
+    Math::Point3DValue dotProduct;
+
+    for (auto const &shape: shapes) {
+        if (shape->isPureLight()) {
+            ray.direction = shape->getCenter() - ray.origin;
+            ray.direction.normalize();
+            dotProduct = incommingDirection.dot(ray.direction);
+            if (dotProduct < 0)
+                continue;
+            pureLightColor = _renderPureLight(rayListPureLights(ray)) * \
+                dotProduct;
+            light = pureLightColor.withoutAlpha() * color.withoutAlpha();
+        }
+    }
+}
+
 Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
     Raytracer::HitPointList hitPointList, bool &variated)
 {
@@ -70,7 +120,7 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
 
     hitPointList.sort();
     for (std::size_t i = 0; i < rebound; i++) {
-        if (hitPointList.size() < 1) {
+        if (hitPointList.empty()) {
             light += getSkyBox() * color;
             return light;
         }
@@ -88,23 +138,27 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
             hitPointList.pop_front();
             continue;
         }
-        light += texture.light.withoutAlpha() * color.withoutAlpha();
-        color *= texture.color.withoutAlpha();
         ray.origin = hitPointList.front().position;
+        hitPointList.front().reflect.normalize();
         if (isMirrorAtMax(texture.mirrorValue))
             ray.direction = reflectMirror(ray.direction, \
                 hitPointList.front().reflect);
         else {
             variated = true;
             if (isMirrorAtMin(texture.mirrorValue))
-                ray.direction = hitPointList.front().reflect.variation(1.0);
+                ray.direction = hitPointList.front().reflect.variation(1.0, \
+                    false);
             else
-                ray.direction = hitPointList.front().reflect.variation(1.0) * \
-                    (Raytracer::TextureMirrorValueMaximum - \
+                ray.direction = hitPointList.front().reflect.variation(1.0, \
+                    false) * (Raytracer::TextureMirrorValueMaximum - \
                     texture.mirrorValue) + reflectMirror(ray.direction, \
                     hitPointList.front().reflect) * texture.mirrorValue;
         }
         ray.direction.normalize();
+        light += texture.light.withoutAlpha() * color.withoutAlpha();
+        _renderPureLighting(Raytracer::Ray(ray.origin, \
+            hitPointList.front().reflect), color, light);
+        color *= texture.color.withoutAlpha();
         hitPointList = rayListCollisions(ray);
         hitPointList.sort();
     }
@@ -130,9 +184,10 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
         return color.toDisplayPixel();
     for (size_t i = 0; i < blending; i++) {
         if (i == 1 && !needBlend)
-            return cumulatedColor.toDisplayPixel();
+            return cumulatedColor.normalized().toDisplayPixel();
         cumulatedColor.addAllColorValues(SCENE_RENDER_AT_FROM_LIST);
     }
     cumulatedColor.divideEveryColor(blending);
+    cumulatedColor.normalize();
     return cumulatedColor.toDisplayPixel();
 }

@@ -7,7 +7,7 @@
 
 #include "Raytracer/Scene.hpp"
 
-Raytracer::HitPointList Raytracer::Scene::rayListCollisions(Raytracer::Ray \
+Raytracer::HitPointList Raytracer::Scene::rayListPureLights(Raytracer::Ray \
     const &ray)
 {
     Raytracer::HitPointList hitPointList;
@@ -16,6 +16,23 @@ Raytracer::HitPointList Raytracer::Scene::rayListCollisions(Raytracer::Ray \
         for (auto const &hitpoint: shape->hitPoints(ray))
             if (hitpoint.distance >= 0.0001)
                 hitPointList.push_back(hitpoint);
+    hitPointList.sort();
+    return hitPointList;
+}
+
+Raytracer::HitPointList Raytracer::Scene::rayListCollisions(Raytracer::Ray \
+    const &ray)
+{
+    Raytracer::HitPointList hitPointList;
+
+    for (auto const &shape: shapes) {
+        if (shape->isPureLight())
+            continue;
+        for (auto const &hitpoint: shape->hitPoints(ray)) {
+            if (hitpoint.distance >= 0.0001 && !hitpoint.texture.isPureLight)
+                hitPointList.push_back(hitpoint);
+        }
+    }
     hitPointList.sort();
     return hitPointList;
 }

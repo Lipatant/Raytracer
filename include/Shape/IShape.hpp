@@ -9,6 +9,7 @@
 #include <list>
 #include <memory>
 #include <iostream>
+#include "Math/Point3D.hpp"
 #include "Raytracer/Texture.hpp"
 #include "Raytracer/HitPoint.hpp"
 #include "Raytracer/Ray.hpp"
@@ -24,9 +25,12 @@ public:
     virtual Raytracer::HitPointList hitPoints(Raytracer::Ray const &ray) \
         const = 0;
     //
+    virtual Math::Point3D getCenter(void) const = 0;
+    //
     virtual Raytracer::Texture texture(void) = 0;
     virtual Raytracer::Texture texture(void) const = 0;
     virtual std::string name(void) const = 0;
+    virtual bool isPureLight(void) const = 0;
 };
 
 using Shape = std::unique_ptr<IShape>;

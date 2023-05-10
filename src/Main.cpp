@@ -14,7 +14,7 @@
 #include "Shape.hpp"
 #include "Obj/Parser.hpp"
 
-#define DEFAULT_MIRROR_CUBE 1.0
+#define DEFAULT_MIRROR_CUBE 0.98 // 0.98
 
 Arg::Argument Arg::INPUT;
 
@@ -49,16 +49,34 @@ int main(int const ac, char * const * const av)
     scene.camera.rotation = Math::Angle3D(0,0);
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
         Math::Point3D(0,0,2), 0.5, Raytracer::Texture(Raytracer::Color(1, 1, 1), Raytracer::Color(1, 1, 1, 1))));
+    scene.shapes.push_back(Shape::createShape<Shape::Triangle>( \
+        Math::Point3D(0,0,0), Math::Point3D(0,1,1), Math::Point3D(1,1,0), \
+        Raytracer::Texture(Raytracer::Texture(Raytracer::Color(1, 0.5, 1), \
+        Raytracer::Color(1, 0.5, 1, 0.2), 0.5))));
+    scene.shapes.push_back(Shape::createShape<Shape::Triangle>( \
+        Math::Point3D(0,0,0), Math::Point3D(-1,-1,0), Math::Point3D(0,-1,-1), \
+        Raytracer::Texture(Raytracer::Texture(Raytracer::Color(1, 1, 0.5), \
+        Raytracer::Color(1, 1, 0.5, 0.2), 0.5))));
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
-        Math::Point3D(0,0,0), 0.8, Raytracer::Texture(Raytracer::Color(1, 1, 1))));
+        Math::Point3D(0,0,0), 0.05, Raytracer::Texture(Raytracer::Color(1, 0.5, 0.5), Raytracer::Color(1, 0.5, 0.5, 0.2))));
+    scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
+        Math::Point3D(1,1,0), 0.05, Raytracer::Texture(Raytracer::Color(0.5, 1, 0.5), Raytracer::Color(0.5, 1, 0.5, 0.2))));
+    scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
+        Math::Point3D(0,1,1), 0.05, Raytracer::Texture(Raytracer::Color(0.5, 0.5, 1), Raytracer::Color(0.5, 0.5, 1, 0.2))));
+    scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
+        Math::Point3D(-1,-1,0), 0.05, Raytracer::Texture(Raytracer::Color(0.5, 1, 0.5), Raytracer::Color(0.5, 1, 0.5, 0.2))));
+    scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
+        Math::Point3D(0,-1,-1), 0.05, Raytracer::Texture(Raytracer::Color(0.5, 0.5, 1), Raytracer::Color(0.5, 0.5, 1, 0.2))));
+//    scene.shapes.push_back(Shape::createShape<Shape::Sphere>(
+//        Math::Point3D(0,0,0), 0.8, Raytracer::Texture(Raytracer::Color(1, 1, 1))));
     // Haut
     scene.shapes.push_back(Shape::createShape<Shape::Plane>( \
         Math::Point3D(0,0,2), Math::Vector3D(1,0,0), Math::Vector3D(0,1,0), \
         Raytracer::Texture(Raytracer::Color(1, 1, 1), Raytracer::Color(1, 1, 1, 0.2), DEFAULT_MIRROR_CUBE)));
-    // Haut
+    // Bas
     scene.shapes.push_back(Shape::createShape<Shape::Plane>( \
         Math::Point3D(0,0,-2), Math::Vector3D(1,0,0), Math::Vector3D(0,1,0), \
-        Raytracer::Texture(Raytracer::Color(1, 1, 1), DEFAULT_MIRROR_CUBE)));
+        Raytracer::Texture(Raytracer::Color(1, 1, 1), Raytracer::Color(1, 1, 1, 0), DEFAULT_MIRROR_CUBE)));
     // Arrière
     scene.shapes.push_back(Shape::createShape<Shape::Plane>( \
         Math::Point3D(2,0,0), Math::Vector3D(0,1,0), Math::Vector3D(0,0,1), \

@@ -12,18 +12,18 @@
 Math::Point3D Math::Point3D::cross(Math::Point3D const &other) const
 {
     return (Math::Point3D(
-        y * other.z - z * other.y,
+        z * other.y - y * other.z,
         x * other.z - z * other.x,
-        x * other.y - y * other.x
+        y * other.x - x * other.y
     ));
 }
 
 Math::Point3D Math::Point3D::cross(Math::Vector3D const &other) const
 {
     return (Math::Point3D(
-        y * other.z - z * other.y,
+        z * other.y - y * other.z,
         x * other.z - z * other.x,
-        x * other.y - y * other.x
+        y * other.x - x * other.y
     ));
 }
 

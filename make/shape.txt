@@ -1,4 +1,7 @@
+Shape/AmbientLight.cpp
 Shape/AShape.cpp
+Shape/DirectionalLight.cpp
 Shape/IShape.cpp
 Shape/Plane.cpp
 Shape/Sphere.cpp
+Shape/Triangle.cpp

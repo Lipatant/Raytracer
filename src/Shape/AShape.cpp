@@ -31,6 +31,11 @@ bool Shape::AShape::hits(Raytracer::Ray const &ray) const
     return (hitPoints(ray).size() >= 1);
 }
 
+Math::Point3D Shape::AShape::getCenter(void) const
+{
+    return Math::Point3D();
+}
+
 Raytracer::HitPointList Shape::AShape::hitPoints(FLAG_UNUSED Raytracer::Ray \
     const &ray) const
 {
@@ -50,4 +55,9 @@ Raytracer::Texture Shape::AShape::texture(void) const
 std::string Shape::AShape::name(void) const
 {
     return _name;
+}
+
+bool Shape::AShape::isPureLight(void) const
+{
+    return _isPureLight;
 }

@@ -23,6 +23,7 @@ public: // Main Attributes
     Raytracer::Color color;
     Raytracer::Color light;
     double mirrorValue = Raytracer::ColorValueMinimum;
+    bool isPureLight = false;
 public:
     Texture(void);
     Texture(Raytracer::TextureMirrorValue const mirrorValue);
@@ -32,6 +33,9 @@ public:
     Texture(Raytracer::Color const &color, Raytracer::Color const &light);
     Texture(Raytracer::Color const &color, Raytracer::Color const &light, \
         Raytracer::TextureMirrorValue const mirrorValue);
+    Texture(Raytracer::Color const &color, Raytracer::Color const &light, \
+        Raytracer::TextureMirrorValue const mirrorValue, \
+        bool const isPureLight);
     Texture(Raytracer::Texture const &other);
     ~Texture() = default;
     //
