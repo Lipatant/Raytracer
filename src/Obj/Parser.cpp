@@ -141,6 +141,7 @@ void Parser::File::new_element(const libconfig::Setting& s)
     if (FIGURES.find(shapename) == FIGURES.end())
         exit(84);
     FIGURES.at(shapename)(*this, s);
+    std::cout << shapename << std::endl;
 }
 
 void Parser::File::generate_scene(libconfig::Config &cfg)
