@@ -14,7 +14,7 @@ static Raytracer::Texture double_rgb_texture(const libconfig::Setting& shape)
     double g2;
     double b2;
     double a2;
-    double idk2;
+    double mirror;
     std::string rgb1;
     std::string rgba2;
     std::string tmp;
@@ -36,8 +36,8 @@ static Raytracer::Texture double_rgb_texture(const libconfig::Setting& shape)
     b2 = stod(tmp);
     ss2 >> tmp;
     a2 = stod(tmp);
-    if (shape.lookupValue("idk2", idk2))
-        return Raytracer::Texture(Raytracer::Color(r1, g1, b1), Raytracer::Color(r2, g2, b2, a2), idk2);
+    if (shape.lookupValue("mirror", mirror))
+        return Raytracer::Texture(Raytracer::Color(r1, g1, b1), Raytracer::Color(r2, g2, b2, a2), mirror);
     return Raytracer::Texture(Raytracer::Color(r1, g1, b1), Raytracer::Color(r2, g2, b2, a2));
 }
 
@@ -46,7 +46,7 @@ static Raytracer::Texture simple_rgb_texture(std::string rgb, const libconfig::S
     double r;
     double g;
     double b;
-    double idk2;
+    double mirror;
     std::string tmp;
     std::stringstream ss(rgb);
     ss >> tmp;
@@ -55,8 +55,8 @@ static Raytracer::Texture simple_rgb_texture(std::string rgb, const libconfig::S
     g = stod(tmp);
     ss >> tmp;
     b = stod(tmp);
-    if (shape.lookupValue("idk2", idk2))
-        return Raytracer::Texture(Raytracer::Color(r, g, b), idk2);
+    if (shape.lookupValue("mirror", mirror))
+        return Raytracer::Texture(Raytracer::Color(r, g, b), mirror);
     return Raytracer::Texture(Raytracer::Color(r, g, b));
 }
 
@@ -66,7 +66,7 @@ static Raytracer::Texture simple_rgba_texture(std::string rgb, const libconfig::
     double g;
     double b;
     double a;
-    double idk2;
+    double mirror;
     std::string tmp;
     std::stringstream ss(rgb);
     ss >> tmp;
@@ -77,8 +77,8 @@ static Raytracer::Texture simple_rgba_texture(std::string rgb, const libconfig::
     b = stod(tmp);
     ss >> tmp;
     a = stod(tmp);
-    if (shape.lookupValue("idk2", idk2))
-        return Raytracer::Texture(Raytracer::Color(r, g, b, a), idk2);
+    if (shape.lookupValue("mirror", mirror))
+        return Raytracer::Texture(Raytracer::Color(r, g, b, a), mirror);
     return Raytracer::Texture(Raytracer::Color(r, g, b, a));
 }
 
@@ -95,11 +95,11 @@ static Raytracer::Texture generate_texture(const libconfig::Setting& shape)
 
 static void create_sphere(Parser::File& file, const libconfig::Setting& shape)
 {
-    double idk;
+    double radius;
 
-    shape.lookupValue("idk", idk);
+    shape.lookupValue("radius", radius);
     file.shapes.push_back(Shape::createShape<Shape::Sphere>( \
-        Math::Point3D(file.x,file.y,file.z), idk, generate_texture(shape)));
+        Math::Point3D(file.x,file.y,file.z), radius, generate_texture(shape)));
 }
 
 static void create_triangle(Parser::File& file, const libconfig::Setting& shape)

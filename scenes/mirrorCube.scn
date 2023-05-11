@@ -13,7 +13,7 @@ scene =
             x = 0;
             y = 0;
             z = 2;
-            idk = 0.5;
+            radius = 0.5;
             Textrgb1 = "1 1 1";
             Textrgba2 = "1 1 1 1.0";
         },
@@ -22,7 +22,7 @@ scene =
             x = 0;
             y = 0;
             z = 0;
-            idk = 0.8;
+            radius = 0.8;
             Textrgb = "1 1 1 0.2";
         },
         {
@@ -38,7 +38,7 @@ scene =
             vectz2 = 0;
             Textrgb1 = "1.0 1.0 1.0";
             Textrgba2 = "1.0 1.0 1.0 0.2";
-            idk2 = 0.98;
+            mirror = 0.98;
         },
         {
             shape = "pla";
@@ -52,7 +52,7 @@ scene =
             vecty2 = 1;
             vectz2 = 0;
             Textrgb = "1 1 1";
-            idk2 = 0.98;
+            mirror = 0.98;
         },
         {
             shape = "pla";
@@ -66,7 +66,7 @@ scene =
             vecty2 = 0;
             vectz2 = 1;
             Textrgb = "0.5 0.5 1.0";
-            idk2 = 0.98;
+            mirror = 0.98;
         },
         {
             shape = "pla";
@@ -80,7 +80,7 @@ scene =
             vecty2 = 0;
             vectz2 = 1;
             Textrgb = "1.0 1.0 1.0";
-            idk2 = 0.98;
+            mirror = 0.98;
         },
         {
             shape = "pla";
@@ -94,7 +94,7 @@ scene =
             vecty2 = 0;
             vectz2 = 1;
             Textrgb = "1.0 0.5 0.5";
-            idk2 = 0.98;
+            mirror = 0.98;
         },
         {
             shape = "pla";
@@ -108,7 +108,7 @@ scene =
             vecty2 = 0;
             vectz2 = 1;
             Textrgb = "0.5 1 0.5"
-            idk2 = 0.98;
+            mirror = 0.98;
         }
         //{
         //    shape = "tri";
@@ -123,7 +123,7 @@ scene =
         //    z2 = 0;
         //    Textrgb1 = "1 0.5 1";
         //    Textrgba2 = "1 0.5 1 0.2";
-        //    idk2 = 0.5;
+        //    mirror = 0.5;
         //},
         //{
         //    shape = "tri";
@@ -138,7 +138,7 @@ scene =
         //    z2 = -1;
         //    Textrgb1 = "1 0.5 1";
         //    Textrgba2 = "1 0.5 0.5 0.5 0.2";
-        //    idk2 = 0.5;
+        //    mirror = 0.5;
         //}
     );
 };

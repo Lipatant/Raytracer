@@ -20,7 +20,7 @@ scene =
             vecty2 = 1;
             vectz2 = 0;
             Textrgb1 = "0.8 0.8 0.8";
-            idk2 = 1.0;
+            mirror = 1.0;
         },
         {
             shape = "pla";
@@ -34,14 +34,14 @@ scene =
             vecty2 = 1;
             vectz2 = 0;
             Textrgb1 = "0.8 0.8 0.8";
-            idk2 = 1.0;
+            mirror = 1.0;
         },
         {
             shape = "sph";
             x = 3;
             y = 2;
             z = 1;
-            idk = 1.0;
+            radius = 1.0;
             Textrgba = "1 1 1 0.8";
         }
     );
