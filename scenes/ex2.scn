@@ -1,0 +1,48 @@
+scene =
+{
+    camera = {
+        posx = -1.9;
+        posy = 0.0;
+        posz = 0.0;
+        angle1 = 0;
+        angle2 = 0;
+    };
+    shapes = (
+        {
+            shape = "pla";
+            x = 0;
+            y = 0;
+            z = 0.5;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 1;
+            vectz2 = 0;
+            Textrgb1 = "0.8 0.8 0.8";
+            idk2 = 1.0;
+        },
+        {
+            shape = "pla";
+            x = 0;
+            y = 0;
+            z = -0.5;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 1;
+            vectz2 = 0;
+            Textrgb1 = "0.8 0.8 0.8";
+            idk2 = 1.0;
+        },
+        {
+            shape = "sph";
+            x = 3;
+            y = 2;
+            z = 1;
+            idk = 1.0;
+            Textrgba = "1 1 1 0.8";
+        }
+    );
+};
