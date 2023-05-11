@@ -44,8 +44,7 @@ int main(int const ac, char * const * const av)
     scene.camera.position = Math::Point3D(-1.9,0,0);
     scene.camera.rotation = Math::Angle3D(0,0);
     test.parseFile(av[1]);
-    for (auto &shape: test.shapes)
-        scene.shapes.push_back(shape);
+    scene.shapes.splice(test.shapes.end(), scene.shapes);
     /*
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
         Math::Point3D(0,0,2), 0.5, Raytracer::Texture(Raytracer::Color(1, 1, 1), Raytracer::Color(1, 1, 1, 1))));

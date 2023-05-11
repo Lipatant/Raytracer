@@ -163,7 +163,7 @@ void Parser::File::parseFile(const char *filepath)
         std::cerr << "Error reading" << std::endl;
         exit(84);
     } catch(const libconfig::ParseException &pex) {
-        std::cerr << "Error parsing" << std::endl;
+        std::cerr << "Error parsing at line " << pex.getLine() << ": " << pex.getError() << std::endl;
         exit(84);
     }
     generate_scene(cfg);
