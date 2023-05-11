@@ -57,7 +57,29 @@ static Raytracer::Texture simple_rgb_texture(std::string rgb, const libconfig::S
     b = stod(tmp);
     if (shape.lookupValue("idk2", idk2))
         return Raytracer::Texture(Raytracer::Color(r, g, b), idk2);
-    return Raytracer::Texture(Raytracer::Color(r, g,b));
+    return Raytracer::Texture(Raytracer::Color(r, g, b));
+}
+
+static Raytracer::Texture simple_rgba_texture(std::string rgb, const libconfig::Setting& shape)
+{
+    double r;
+    double g;
+    double b;
+    double a;
+    double idk2;
+    std::string tmp;
+    std::stringstream ss(rgb);
+    ss >> tmp;
+    r = stod(tmp);
+    ss >> tmp;
+    g = stod(tmp);
+    ss >> tmp;
+    b = stod(tmp);
+    ss >> tmp;
+    a = stod(tmp);
+    if (shape.lookupValue("idk2", idk2))
+        return Raytracer::Texture(Raytracer::Color(r, g, b, a), idk2);
+    return Raytracer::Texture(Raytracer::Color(r, g, b, a));
 }
 
 static Raytracer::Texture generate_texture(const libconfig::Setting& shape)
@@ -66,6 +88,8 @@ static Raytracer::Texture generate_texture(const libconfig::Setting& shape)
 
     if (shape.lookupValue("Textrgb", type_text))
         return simple_rgb_texture(type_text, shape);
+    else if (shape.lookupValue("Textrgba", type_text))
+        return simple_rgba_texture(type_text, shape);
     return double_rgb_texture(shape);
 }
 
@@ -161,7 +185,7 @@ void Parser::File::parseFile(const char *filepath)
     try {
         cfg.readFile(filepath);
     } catch(const libconfig::FileIOException &fio) {
-        std::cerr << "Error reading" << std::endl;
+        std::cerr << "Error reading: " << std::endl;
         exit(84);
     } catch(const libconfig::ParseException &pex) {
         std::cerr << "Error parsing at line " << pex.getLine() << ": " << pex.getError() << std::endl;
