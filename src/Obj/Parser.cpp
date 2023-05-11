@@ -155,7 +155,6 @@ void Parser::File::new_element(const libconfig::Setting& s)
     if (FIGURES.find(shapename) == FIGURES.end())
         exit(84);
     FIGURES.at(shapename)(*this, s);
-    std::cout << shapename << std::endl;
 }
 
 void Parser::File::manage_camera(const libconfig::Setting& c)
@@ -179,14 +178,13 @@ void Parser::File::generate_scene(libconfig::Config &cfg)
 {
     const libconfig::Setting& s = cfg.lookup("scene.shapes");
     const libconfig::Setting& c = cfg.lookup("scene.camera");
-    const libconfig::Setting& c2 = c[0];
 
     for (int i = 0; i < s.getLength(); ++i) {
         const libconfig::Setting& shape = s[i];
         new_element(shape);
     }
 
-    manage_camera(c2);
+    manage_camera(c);
 }
 
 void Parser::File::parseFile(const char *filepath)

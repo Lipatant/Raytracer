@@ -1,14 +1,12 @@
 scene =
 {
-    camera = (
-        {
+    camera = {
         posx = -1.9;
         posy = 0.0;
         posz = 0.0;
         angle1 = 0;
         angle2 = 0;
-        }
-    );
+    };
     shapes = (
         {
             shape = "pla";
