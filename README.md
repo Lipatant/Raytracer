@@ -33,6 +33,16 @@ To run the project:
 To use Raytracer you need a configuration file like the following:
 
 ```
+
+    We with arguments to return which are the following:
+
+    --blending or -b for Blending, this allows us to overlay all the scene possibilities
+    --fov or -f for Field Of View, this allows us to give the fov of the scene
+    --height or -h for Height, this allows us to give the size we want for our scene
+    --width or -w for Width, which allows us to give the width of our scene
+    --out or -o for Out, for the file that will be rendered in 3D
+    --rebound or -r for Rebound, that allows us to choose the number of bounce of the light
+
 /*example.cfg: An example configuration file that stores information about a store. */
 
 // Basic store information:
