@@ -19,7 +19,7 @@ scene =
             vectx2 = 0;
             vecty2 = 1;
             vectz2 = 0;
-            Textrgb1 = "0.8 0.8 0.8";
+            color = "0.8 0.8 0.8";
             mirror = 1.0;
         },
         {
@@ -33,7 +33,7 @@ scene =
             vectx2 = 0;
             vecty2 = 1;
             vectz2 = 0;
-            Textrgb1 = "0.8 0.8 0.8";
+            color = "0.8 0.8 0.8";
             mirror = 1.0;
         },
         {
@@ -42,7 +42,7 @@ scene =
             y = 2;
             z = 1;
             radius = 1.0;
-            Textrgba = "1 1 1 0.8";
+            rgba = "1 1 1 0.8";
         }
     );
 };

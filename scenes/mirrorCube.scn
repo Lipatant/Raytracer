@@ -14,8 +14,8 @@ scene =
             y = 0;
             z = 2;
             radius = 0.5;
-            Textrgb1 = "1 1 1";
-            Textrgba2 = "1 1 1 1.0";
+            color = "1 1 1";
+            light = "1 1 1 1.0";
         },
         {
             shape = "sph";
@@ -23,7 +23,7 @@ scene =
             y = 0;
             z = 0;
             radius = 0.8;
-            Textrgb = "1 1 1 0.2";
+            rgb = "1 1 1 0.2";
         },
         {
             shape = "pla";
@@ -36,8 +36,8 @@ scene =
             vectx2 = 0;
             vecty2 = 1;
             vectz2 = 0;
-            Textrgb1 = "1.0 1.0 1.0";
-            Textrgba2 = "1.0 1.0 1.0 0.2";
+            color = "1.0 1.0 1.0";
+            light = "1.0 1.0 1.0 0.2";
             mirror = 0.98;
         },
         {
@@ -51,7 +51,7 @@ scene =
             vectx2 = 0;
             vecty2 = 1;
             vectz2 = 0;
-            Textrgb = "1 1 1";
+            rgb = "1 1 1";
             mirror = 0.98;
         },
         {
@@ -65,7 +65,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            Textrgb = "0.5 0.5 1.0";
+            rgb = "0.5 0.5 1.0";
             mirror = 0.98;
         },
         {
@@ -79,7 +79,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            Textrgb = "1.0 1.0 1.0";
+            rgb = "1.0 1.0 1.0";
             mirror = 0.98;
         },
         {
@@ -93,7 +93,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            Textrgb = "1.0 0.5 0.5";
+            rgb = "1.0 0.5 0.5";
             mirror = 0.98;
         },
         {
@@ -107,7 +107,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            Textrgb = "0.5 1 0.5"
+            rgb = "0.5 1 0.5"
             mirror = 0.98;
         }
         //{
@@ -121,8 +121,8 @@ scene =
         //    x2 = 1;
         //    y2 = 1;
         //    z2 = 0;
-        //    Textrgb1 = "1 0.5 1";
-        //    Textrgba2 = "1 0.5 1 0.2";
+        //    color = "1 0.5 1";
+        //    light = "1 0.5 1 0.2";
         //    mirror = 0.5;
         //},
         //{
@@ -136,8 +136,8 @@ scene =
         //    x2 = 0;
         //    y2 = -1;
         //    z2 = -1;
-        //    Textrgb1 = "1 0.5 1";
-        //    Textrgba2 = "1 0.5 0.5 0.5 0.2";
+        //    color = "1 0.5 1";
+        //    light = "1 0.5 0.5 0.5 0.2";
         //    mirror = 0.5;
         //}
     );

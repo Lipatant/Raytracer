@@ -18,8 +18,8 @@ static Raytracer::Texture double_rgb_texture(const libconfig::Setting& shape)
     std::string rgb1;
     std::string rgba2;
     std::string tmp;
-    shape.lookupValue("Textrgb1", rgb1);
-    shape.lookupValue("Textrgba2", rgba2);
+    shape.lookupValue("color", rgb1);
+    shape.lookupValue("light", rgba2);
     std::stringstream ss1(rgb1);
     ss1 >> tmp;
     r1 = stod(tmp);
@@ -86,9 +86,9 @@ static Raytracer::Texture generate_texture(const libconfig::Setting& shape)
 {
     std::string type_text;
 
-    if (shape.lookupValue("Textrgb", type_text))
+    if (shape.lookupValue("rgb", type_text))
         return simple_rgb_texture(type_text, shape);
-    else if (shape.lookupValue("Textrgba", type_text))
+    else if (shape.lookupValue("rgba", type_text))
         return simple_rgba_texture(type_text, shape);
     return double_rgb_texture(shape);
 }
