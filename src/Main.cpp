@@ -41,10 +41,10 @@ int main(int const ac, char * const * const av)
     scene.camera.width = Arg::INPUT.width;
     scene.camera.height = Arg::INPUT.height;
     scene.camera.fov = 180;
-    scene.camera.position = Math::Point3D(-1.9,0,0);
-    scene.camera.rotation = Math::Angle3D(0,0);
     fileScene.parseFile(Arg::INPUT.fileScene.c_str());
     scene.shapes.splice(scene.shapes.end(), fileScene.shapes);
+    scene.camera.position = fileScene.camPos;
+    scene.camera.rotation = fileScene.camRot;
     if (Arg::INPUT.out.empty())
         std::cout << scene.render();
     else

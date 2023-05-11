@@ -146,16 +146,6 @@ const std::map<std::string, void (*)(Parser::File&, const libconfig::Setting&)> 
     {"pla", create_plane},
 };
 
-Parser::File::File(void)
-{
-
-}
-
-Parser::File::~File(void)
-{
-
-}
-
 void Parser::File::new_element(const libconfig::Setting& s)
 {
     s.lookupValue("shape", shapename);
@@ -165,16 +155,38 @@ void Parser::File::new_element(const libconfig::Setting& s)
     if (FIGURES.find(shapename) == FIGURES.end())
         exit(84);
     FIGURES.at(shapename)(*this, s);
+    std::cout << shapename << std::endl;
+}
+
+void Parser::File::manage_camera(const libconfig::Setting& c)
+{
+    double posx;
+    double posy;
+    double posz;
+    int angle1;
+    int angle2;
+
+    c.lookupValue("posx", posx);
+    c.lookupValue("posy", posy);
+    c.lookupValue("posz", posz);
+    c.lookupValue("angle1", angle1);
+    c.lookupValue("angle2", angle2);
+    camPos = Math::Point3D(posx, posy, posz);
+    camRot = Math::Angle3D(angle1, angle2);
 }
 
 void Parser::File::generate_scene(libconfig::Config &cfg)
 {
     const libconfig::Setting& s = cfg.lookup("scene.shapes");
+    const libconfig::Setting& c = cfg.lookup("scene.camera");
+    const libconfig::Setting& c2 = c[0];
 
     for (int i = 0; i < s.getLength(); ++i) {
         const libconfig::Setting& shape = s[i];
         new_element(shape);
     }
+
+    manage_camera(c2);
 }
 
 void Parser::File::parseFile(const char *filepath)

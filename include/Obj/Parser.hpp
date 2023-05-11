@@ -16,17 +16,6 @@
 
 namespace Parser
 {
-    class Plane {
-        int vectx1;
-        int vecty1;
-        int vectz1;
-        int vectx2;
-        int vecty2;
-        int vectz2;
-        double idk2;
-        Plane(){}
-        ~Plane(){}
-    };
     class File {
         public:
             std::string shapename;
@@ -45,11 +34,14 @@ namespace Parser
             double Text2g = 0;
             double Text2b = 0;
             double Text2a = 0.0;
-            File();
-            ~File();
+            Math::Point3D camPos;
+            Math::Angle3D camRot;
+            File(void){}
+            ~File(void){}
             std::list<Shape::Shape> shapes;
             void parseFile(const char *);
             void new_element(const libconfig::Setting& shape);
+            void manage_camera(const libconfig::Setting &cam);
             void generate_scene(libconfig::Config &cfg);
     };
 }
