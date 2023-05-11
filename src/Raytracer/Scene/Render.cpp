@@ -8,6 +8,7 @@
 #include <chrono>
 #include <ctime>
 #include <vector>
+#include "Argument/Extern.hpp"
 #include "Raytracer/Scene.hpp"
 
 #define GET_TIME_NOW std::chrono::high_resolution_clock::now()
@@ -87,16 +88,21 @@ Raytracer::Display Raytracer::Scene::render(void)
     std::size_t displayWidth = display.width();
     std::size_t displayHeight = display.height();
     StaticHere::Display status(displayWidth);
+    bool displayInConsole = !Arg::INPUT.noConsole;
 
     std::srand(std::time(nullptr));
     camera.rotation.normalize();
     if (shapes.size() < 1)
         return display;
     for (std::size_t x = 0; x < displayWidth; x++) {
-        std::cout << status << std::endl;
-        for (std::size_t y = 0; y < displayHeight; y++)
-            display.at(x, y) = renderAt(x, y);
-        status.resetTime();
+        if (displayInConsole) {
+            std::cout << status << std::endl;
+            for (std::size_t y = 0; y < displayHeight; y++)
+                display.at(x, y) = renderAt(x, y);
+            status.resetTime();
+        } else
+            for (std::size_t y = 0; y < displayHeight; y++)
+                display.at(x, y) = renderAt(x, y);
     }
     return display;
 }

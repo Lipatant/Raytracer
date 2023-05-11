@@ -30,6 +30,18 @@ static void writeFile(std::string const &filepath, Raytracer::Display const \
     file.close();
 }
 
+static int displayUsage(std::ostream &stream)
+{
+    stream << "USAGE:" << std::endl;
+    stream << "\t./raytracer <SCENE_FILE>/-h [...]" << std::endl;
+    stream << std::endl;
+    stream << "\tSCENE_FILE: scene configuration" << std::endl;
+    stream << "\t-h / --help: display usage" << std::endl;
+    stream << std::endl;
+    stream << "For more options, check README.md" << std::endl;
+    return 0;
+}
+
 int main(int const ac, char * const * const av)
 {
     Raytracer::Ray ray;
@@ -38,6 +50,8 @@ int main(int const ac, char * const * const av)
 
     if (!Arg::INPUT.setArguments(ac, av))
         return 84;
+    if (Arg::INPUT.askUsage)
+        return displayUsage(std::cout);
     scene.camera.width = Arg::INPUT.width;
     scene.camera.height = Arg::INPUT.height;
     scene.camera.fov = 180;

@@ -109,7 +109,7 @@ scene =
             vectz2 = 1;
             Textrgb = "0.5 1 0.5"
             idk2 = 0.98;
-        },
+        }
         //{
         //    shape = "tri";
         //    x0 = 0;

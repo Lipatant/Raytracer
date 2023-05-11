@@ -12,6 +12,7 @@ namespace Arg {
 
 class Argument {
 public:
+    bool askUsage = false;
     double fov = 90;
     std::size_t width = 680;
     std::size_t height = 400;
@@ -19,6 +20,9 @@ public:
     std::size_t blending = 1;
     std::string fileScene;
     std::string out = "out.ppm";
+    //
+    bool alphadup = false;
+    bool noConsole = false;
     //
     Argument(void);
     ~Argument(void) = default;
