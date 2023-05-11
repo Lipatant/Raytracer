@@ -9,7 +9,7 @@ scene =
     };
     shapes = (
         {
-            shape = "sph";
+            shape = "sphere";
             x = 0;
             y = 0;
             z = 2;
@@ -18,7 +18,7 @@ scene =
             light = "1 1 1 1.0";
         },
         {
-            shape = "sph";
+            shape = "sphere";
             x = 0;
             y = 0;
             z = 0;
@@ -26,7 +26,7 @@ scene =
             rgb = "1 1 1 0.2";
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = 0;
             y = 0;
             z = 2;
@@ -41,7 +41,7 @@ scene =
             mirror = 0.98;
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = 0;
             y = 0;
             z = -2;
@@ -55,7 +55,7 @@ scene =
             mirror = 0.98;
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = 2;
             y = 0;
             z = 0;
@@ -69,7 +69,7 @@ scene =
             mirror = 0.98;
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = -2;
             y = 0;
             z = 0;
@@ -83,7 +83,7 @@ scene =
             mirror = 0.98;
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = 0;
             y = -2;
             z = 0;
@@ -97,7 +97,7 @@ scene =
             mirror = 0.98;
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = 0;
             y = 2;
             z = 0;
@@ -111,7 +111,7 @@ scene =
             mirror = 0.98;
         }
         //{
-        //    shape = "tri";
+        //    shape = "triangle";
         //    x0 = 0;
         //    y0 = 0;
         //    z0 = 0;
@@ -126,7 +126,7 @@ scene =
         //    mirror = 0.5;
         //},
         //{
-        //    shape = "tri";
+        //    shape = "triangle";
         //    x = 0;
         //    y = 0;
         //    z = 0;

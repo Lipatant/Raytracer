@@ -141,9 +141,9 @@ static void create_plane(Parser::File& file, const libconfig::Setting& shape)
 }
 
 const std::map<std::string, void (*)(Parser::File&, const libconfig::Setting&)> FIGURES = {
-    {"sph", create_sphere},
-    {"tri", create_triangle},
-    {"pla", create_plane},
+    {"sphere", create_sphere},
+    {"triangle", create_triangle},
+    {"plane", create_plane},
 };
 
 void Parser::File::new_element(const libconfig::Setting& s)

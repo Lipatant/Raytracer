@@ -9,7 +9,7 @@ scene =
     };
     shapes = (
         {
-            shape = "pla";
+            shape = "plane";
             x = 0;
             y = 0;
             z = 0.5;
@@ -23,7 +23,7 @@ scene =
             mirror = 1.0;
         },
         {
-            shape = "pla";
+            shape = "plane";
             x = 0;
             y = 0;
             z = -0.5;
@@ -37,7 +37,7 @@ scene =
             mirror = 1.0;
         },
         {
-            shape = "sph";
+            shape = "sphere";
             x = 3;
             y = 2;
             z = 1;
