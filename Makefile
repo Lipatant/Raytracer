@@ -90,7 +90,7 @@ play_re: re
 	./$(NAME)
 
 tests_run: fclean
-		$(CC) -o $(UT) $(CFLAGS_UT) $(CPPFLAGS_UT) $(SRC_UT) $(SRC_TU) \
+		$(CC) -o $(UT) $(CFLAGS_UT) $(CPPFLAGS_UT) \
 			$(LCRITERION) $(CPPFLAGS_UT)
 		./$(UT)
 

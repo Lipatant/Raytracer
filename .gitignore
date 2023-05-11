@@ -25,6 +25,8 @@ logs*.txt
 #(Useless file on the github repository)
 test*.txt
 
+# Executable of unit_tests.cpp
+unit_tests
 
 #2. The *folders* that must be ignored: (alpahabetic order)
 
