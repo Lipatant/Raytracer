@@ -14,8 +14,11 @@
 namespace Raytracer {
 
 using CameraDirection = Math::Vector3D;
+using CameraDirectionValue = Math::Vector3DValue;
 using CameraPosition = Math::Point3D;
+using CameraPositionValue= Math::Point3DValue;
 using CameraRotation = Math::Angle3D;
+using CameraRotationValue = Math::Angle3DValue;
 
 class Camera {
 private:

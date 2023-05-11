@@ -8,6 +8,10 @@
 #include <vector>
 #include "Argument/Extern.hpp"
 #include "Raytracer/Scene.hpp"
+#include <cmath>
+
+// Degrees to radians conversion
+#define D2R(D) ((D / 180.0) * ((double) M_PI))
 
 static Raytracer::CameraDirection getDirection(Raytracer::Camera const \
     camera, std::size_t const x, std::size_t const y)
@@ -21,6 +25,33 @@ static Raytracer::CameraDirection getDirection(Raytracer::Camera const \
     tiltedCamera.rotation.y -= ((y - camera.height * 0.5) * verticalFov) /
         camera.height;
     return tiltedCamera.direction();
+}
+
+static Raytracer::CameraDirection getCameraDirection(Raytracer::Camera \
+    camera, std::size_t const x, std::size_t const y)
+{
+    if (Arg::INPUT.angularcamera) return getDirection(camera, x, y);
+    double ratio = static_cast<double>(camera.height) / camera.width;
+    double ratioWidth = (camera.width > 1) ? \
+        (static_cast<double>(x) / (camera.width - 1)) : (0.5);
+    double ratioHeight = (camera.height > 1) ? \
+        (static_cast<double>(y) / (camera.height - 1)) : (0.5);
+    Raytracer::CameraDirectionValue width = tan(D2R(camera.fov / 2)) * 2;
+    Raytracer::CameraDirectionValue height = width * ratio;
+    Raytracer::CameraDirection base(1, width * -0.5, height * -0.5);
+    Raytracer::CameraPosition point2D(base + Raytracer::CameraPosition(0, \
+        width * ratioWidth, height * ratioHeight));
+    Raytracer::CameraDirection frontBack(camera.direction().normalized());
+    Raytracer::CameraDirection downUp(Raytracer::CameraRotation( \
+        camera.rotation + \
+        Raytracer::CameraRotation(0,90)).direction().normalized());
+    Raytracer::CameraDirection leftRight(frontBack.cross(downUp));
+    leftRight.normalize();
+    Raytracer::CameraPosition point3D(frontBack * point2D.x + \
+        leftRight * point2D.y + downUp * point2D.z);
+
+    point3D.z *= -1;
+    return (Raytracer::CameraDirection(point3D));
 }
 
 static bool isMirrorAtMin(Raytracer::TextureMirrorValue const value)
@@ -173,13 +204,13 @@ Raytracer::DisplayPixel Raytracer::Scene::renderAt(std::size_t const x, \
 {
     Raytracer::Color cumulatedColor;
     Raytracer::Color color;
-    Raytracer::CameraDirection cameraDirection(getDirection(camera, x, y));
+    Raytracer::CameraDirection cameraDirection( \
+        getCameraDirection(camera, x, y).normalized());
     Raytracer::Ray ray(cameraDirection, camera.position);
     Raytracer::HitPointList hitPointList = rayListCollisions(ray);
     std::size_t blending = Arg::INPUT.blending;
     bool needBlend = false;
 
-    cameraDirection.normalize();
     if (blending <= 0)
         return color.toDisplayPixel();
     for (size_t i = 0; i < blending; i++) {
