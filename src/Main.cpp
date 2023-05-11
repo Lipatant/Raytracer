@@ -34,14 +34,19 @@ int main(int const ac, char * const * const av)
 {
     Raytracer::Ray ray;
     Raytracer::Scene scene;
+    Parser::File test;
 
-    if (!Arg::INPUT.setArguments(ac, av))
-        return 84;
+//    if (!Arg::INPUT.setArguments(ac, av))
+//        return 84;
     scene.camera.width = Arg::INPUT.width;
     scene.camera.height = Arg::INPUT.height;
     scene.camera.fov = 180;
     scene.camera.position = Math::Point3D(-1.9,0,0);
     scene.camera.rotation = Math::Angle3D(0,0);
+    test.parseFile(av[1]);
+    for (auto &shape: test.shapes)
+        scene.shapes.push_back(shape);
+    /*
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
         Math::Point3D(0,0,2), 0.5, Raytracer::Texture(Raytracer::Color(1, 1, 1), Raytracer::Color(1, 1, 1, 1))));
     scene.shapes.push_back(Shape::createShape<Shape::Triangle>( \
@@ -62,8 +67,8 @@ int main(int const ac, char * const * const av)
         Math::Point3D(-1,-1,0), 0.05, Raytracer::Texture(Raytracer::Color(0.5, 1, 0.5), Raytracer::Color(0.5, 1, 0.5, 0.2))));
     scene.shapes.push_back(Shape::createShape<Shape::Sphere>( \
         Math::Point3D(0,-1,-1), 0.05, Raytracer::Texture(Raytracer::Color(0.5, 0.5, 1), Raytracer::Color(0.5, 0.5, 1, 0.2))));
-//    scene.shapes.push_back(Shape::createShape<Shape::Sphere>(
-//        Math::Point3D(0,0,0), 0.8, Raytracer::Texture(Raytracer::Color(1, 1, 1))));
+    scene.shapes.push_back(Shape::createShape<Shape::Sphere>(
+        Math::Point3D(0,0,0), 0.8, Raytracer::Texture(Raytracer::Color(1, 1, 1))));
     // Haut
     scene.shapes.push_back(Shape::createShape<Shape::Plane>( \
         Math::Point3D(0,0,2), Math::Vector3D(1,0,0), Math::Vector3D(0,1,0), \
@@ -88,6 +93,7 @@ int main(int const ac, char * const * const av)
     scene.shapes.push_back(Shape::createShape<Shape::Plane>( \
         Math::Point3D(0,2,0), Math::Vector3D(1,0,0), Math::Vector3D(0,0,1), \
         Raytracer::Texture(Raytracer::Color(0.5, 1, 0.5), DEFAULT_MIRROR_CUBE)));
+    */
     if (Arg::INPUT.out.empty())
         std::cout << scene.render();
     else

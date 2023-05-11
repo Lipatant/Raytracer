@@ -16,22 +16,6 @@
 
 namespace Parser
 {
-    class Sphere {
-        double idk;
-        Sphere(){}
-        ~Sphere(){}
-    };
-    class Triangle {
-        int x1;
-        int y1;
-        int z1;
-        int x2;
-        int y2;
-        int z2;
-        double idk2;
-        Triangle(){}
-        ~Triangle(){}
-    };
     class Plane {
         int vectx1;
         int vecty1;
@@ -45,7 +29,7 @@ namespace Parser
     };
     class File {
         public:
-            std::string shape;
+            std::string shapename;
             int x;
             int y;
             int z;
@@ -69,9 +53,3 @@ namespace Parser
             void generate_scene(libconfig::Config &cfg);
     };
 }
-
-const std::map<std::string, void *> FIGURES = {
-    {"sph", nullptr},
-    {"tri", nullptr},
-    {"pla", nullptr}
-};
