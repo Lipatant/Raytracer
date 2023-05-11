@@ -39,6 +39,11 @@ static void assignBlending(Arg::Argument &arg, std::string const &value)
     arg.blending = std::stoul(value);
 }
 
+static void assignScene(Arg::Argument &arg, std::string const &value)
+{
+    arg.fileScene = value;
+}
+
 static const std::map<std::string const, void (*)(Arg::Argument &arg, \
     std::string const &)> ARGUMENT_MAP = {
     {"-b", assignBlending},
@@ -53,6 +58,8 @@ static const std::map<std::string const, void (*)(Arg::Argument &arg, \
     {"--rebound", assignRebound},
     {"-w", assignWidth},
     {"--width", assignWidth},
+    {"-s", assignScene},
+    {"--scene", assignScene},
 };
 
 static bool displayErrorKey(std::string const &key)

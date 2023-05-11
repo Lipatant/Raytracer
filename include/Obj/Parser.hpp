@@ -6,8 +6,8 @@
 */
 
 #include <iostream>
-#include <map>
-#include <vector>
+#include <list>
+#include "Shape.hpp"
 #include <iostream>
 #include <stdlib.h>
 #include <libconfig.h++>
@@ -16,35 +16,32 @@
 
 namespace Parser
 {
-    class Model
-    {
-    public:
-        int x = 0;
-        int y = 0;
-        int z = 0;
-        int r = 0;
-        int g = 0;
-        int b = 0;
-        int width = 0;
-        int height = 0;
-        std::string formName;
-        Model() = default;
-        ~Model() = default;
-    };
     class File {
         public:
-            File();
-            ~File();
-            std::vector<Parser::Model> shapes;
+            std::string shapename;
+            int x;
+            int y;
+            int z;
+            double Textr = 0;
+            double Textg = 0;
+            double Textb = 0;
+            double Texta = 1.0;
+            double Text1r = 0;
+            double Text1g = 0;
+            double Text1b = 0;
+            double Text1a = 1.0;
+            double Text2r = 0;
+            double Text2g = 0;
+            double Text2b = 0;
+            double Text2a = 0.0;
+            Math::Point3D camPos;
+            Math::Angle3D camRot;
+            File(void){}
+            ~File(void){}
+            std::list<Shape::Shape> shapes;
             void parseFile(const char *);
-            Parser::Model new_element(const libconfig::Setting& shape);
+            void new_element(const libconfig::Setting& shape);
+            void manage_camera(const libconfig::Setting &cam);
             void generate_scene(libconfig::Config &cfg);
     };
 }
-
-const std::map<std::string, void *> FIGURES = {
-    {"sph", nullptr},
-    {"tri", nullptr},
-    {"pla", nullptr}
-};
-//string ou on envoye les forme , sph (int)x y z, tri (int)x y z, pla (int)x y z,

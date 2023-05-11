@@ -17,6 +17,7 @@ public:
     std::size_t height = 400;
     std::size_t rebound = 10;
     std::size_t blending = 1;
+    std::string fileScene;
     std::string out = "out.ppm";
     //
     Argument(void);
