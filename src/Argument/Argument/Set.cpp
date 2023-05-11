@@ -59,6 +59,11 @@ static void triggerAlphadup(Arg::Argument &arg)
     arg.alphadup = true;
 }
 
+static void triggerAngularCamera(Arg::Argument &arg)
+{
+    arg.angularcamera = true;
+}
+
 static const std::map<std::string const, void (*)(Arg::Argument &arg, \
     std::string const &)> ARGUMENT_MAP = {
     {"-b", assignBlending},
@@ -78,6 +83,7 @@ static const std::map<std::string const, void (*)(Arg::Argument &arg, \
 static const std::map<std::string const, void (*)(Arg::Argument &arg)> \
     TRIGGER_MAP = {
     {"--alphadub", triggerAlphadup},
+    {"--angularcamera", triggerAngularCamera},
     {"--noconsole", triggerNoConsole},
 };
 

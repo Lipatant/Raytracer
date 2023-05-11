@@ -54,7 +54,7 @@ int main(int const ac, char * const * const av)
         return displayUsage(std::cout);
     scene.camera.width = Arg::INPUT.width;
     scene.camera.height = Arg::INPUT.height;
-    scene.camera.fov = 180;
+    scene.camera.fov = Arg::INPUT.fov;
     fileScene.parseFile(Arg::INPUT.fileScene.c_str());
     scene.shapes.splice(scene.shapes.end(), fileScene.shapes);
     scene.camera.position = fileScene.camPos;

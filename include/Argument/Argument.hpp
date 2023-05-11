@@ -22,6 +22,7 @@ public:
     std::string out = "out.ppm";
     //
     bool alphadup = false;
+    bool angularcamera = false;
     bool noConsole = false;
     //
     Argument(void);
