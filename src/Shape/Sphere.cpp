@@ -17,15 +17,21 @@ Shape::Sphere::Sphere(Math::Point3D const center, Math::Vector3DValue const \
     AShape("Sphere", texture), _center(center), _radius(radius)
 { }
 
+Math::Point3D Shape::Sphere::getCenter(void) const
+{
+    return _center;
+}
+
 Raytracer::HitPointList Shape::Sphere::hitPoints(Raytracer::Ray const &ray) \
     const
 {
     Math::Point3D positionRelative = ray.origin - _center;
     Math::Point3D hit1;
     Math::Point3D hit2;
+    double newRadius = _radius * _scale.x;
     double a = ray.direction.dot(ray.direction);
     double b = 2 * positionRelative.dot(ray.direction);
-    double c = positionRelative.dot(positionRelative) - _radius * _radius;
+    double c = positionRelative.dot(positionRelative) - newRadius * newRadius;
     double d = b * b - 4 * a * c; // discriment
     double fx1;
     double fx2;

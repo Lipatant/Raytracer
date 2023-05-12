@@ -24,6 +24,8 @@ public:
     //
     Raytracer::HitPointList hitPoints(Raytracer::Ray const &ray) const \
         override;
+    //
+    Math::Point3D getCenter(void) const override;
 };
 
 }

@@ -22,6 +22,7 @@ namespace Parser
             Math::Point3DValue x = 0;
             Math::Point3DValue y = 0;
             Math::Point3DValue z = 0;
+            Math::Vector3D scale;
             double fov = 90;
             Math::Point3D camPos;
             Math::Angle3D camRot;

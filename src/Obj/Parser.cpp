@@ -1,15 +1,51 @@
+/*
+** EPITECH PROJECT, 2023
+** Obj/Parser.cpp
+** File description:
+** -
+*/
+
 #include <fstream>
+#include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
-#include <map>
 #include "Obj/Parser.hpp"
-#include <iostream>
 #include "Utility/Regex.hpp"
 
 #define COLOR_RGB_REGEX \
     "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
 #define COLOR_RGBA_REGEX \
     "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+#define VECTOR_REGEX \
+    "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+#define DOUBLE_REGEX \
+    "^\\s*\\d+(|\\.\\d+)\\s*$"
+
+static bool get_vector(std::string const &str, Math::Vector3D &vector)
+{
+    std::string tmp;
+
+    if (utility::regex::quickTest(str, VECTOR_REGEX)) {
+        std::stringstream ss1(str);
+        ss1 >> tmp;
+        vector.x = stod(tmp);
+        ss1 >> tmp;
+        vector.y = stod(tmp);
+        ss1 >> tmp;
+        vector.z = stod(tmp);
+        return true;
+    }
+    if (utility::regex::quickTest(str, DOUBLE_REGEX)) {
+        std::stringstream ss1(str);
+        ss1 >> tmp;
+        vector.x = stod(tmp);
+        vector.y = vector.x;
+        vector.z = vector.x;
+        return true;
+    }
+    return false;
+}
 
 static bool get_color(std::string const &str, Raytracer::Color &color)
 {
@@ -53,10 +89,10 @@ static Raytracer::Texture double_rgb_texture(const libconfig::Setting& shape)
     try {
         if (shape.lookupValue("color", str))
             if (!get_color(str, color))
-                std::cerr << "Couldn't parse '" << str << " as a color" << std::endl;
+                std::cerr << "Couldn't parse '" << str << "' as a color" << std::endl;
         if (shape.lookupValue("light", str))
             if (!get_color(str, light))
-                std::cerr << "Couldn't parse '" << str << " as a light" << std::endl;
+                std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
         shape.lookupValue("mirror", mirror);
         return Raytracer::Texture(color, light, mirror);
     } catch (const std::exception& e) {
@@ -74,10 +110,10 @@ static Raytracer::Color simple_rgb_texture(const libconfig::Setting& shape)
     try {
         if (shape.lookupValue("color", str))
             if (!get_color(str, color))
-                std::cerr << "Couldn't parse '" << str << " as a color/light" << std::endl;
+                std::cerr << "Couldn't parse '" << str << "' as a color/light" << std::endl;
         if (shape.lookupValue("light", str))
             if (!get_color(str, color))
-                std::cerr << "Couldn't parse '" << str << " as a color/light" << std::endl;
+                std::cerr << "Couldn't parse '" << str << "' as a color/light" << std::endl;
         return color;
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
@@ -85,7 +121,7 @@ static Raytracer::Color simple_rgb_texture(const libconfig::Setting& shape)
     return color;
 }
 
-static void create_sphere(Parser::File& file, const libconfig::Setting& shape)
+static bool create_sphere(Parser::File& file, const libconfig::Setting& shape)
 {
     double radius;
 
@@ -98,9 +134,10 @@ static void create_sphere(Parser::File& file, const libconfig::Setting& shape)
         file.shapes.push_back(Shape::createShape<Shape::Sphere>( \
             Math::Point3D(), 0, Raytracer::Texture()));
     }
+    return true;
 }
 
-static void create_triangle(Parser::File& file, const libconfig::Setting& shape)
+static bool create_triangle(Parser::File& file, const libconfig::Setting& shape)
 {
     int x1;
     int y1;
@@ -123,9 +160,10 @@ static void create_triangle(Parser::File& file, const libconfig::Setting& shape)
         file.shapes.push_back(Shape::createShape<Shape::Triangle>( \
             Math::Point3D(), Math::Point3D(), Math::Point3D(), Raytracer::Texture()));
     }
+    return true;
 }
 
-static void create_plane(Parser::File& file, const libconfig::Setting& shape)
+static bool create_plane(Parser::File& file, const libconfig::Setting& shape)
 {
     int vectx1;
     int vecty1;
@@ -150,14 +188,16 @@ static void create_plane(Parser::File& file, const libconfig::Setting& shape)
         file.shapes.push_back((Shape::createShape<Shape::Plane>( \
             Math::Point3D(), Math::Vector3D(), Math::Vector3D(), Raytracer::Texture())));
     }
+    return true;
 }
 
-static void create_ambiant_light(Parser::File& file, const libconfig::Setting& shape)
+static bool create_ambiant_light(Parser::File& file, const libconfig::Setting& shape)
 {
     file.shapes.push_back(Shape::createShape<Shape::AmbientLight>(Math::Point3D(file.x,file.y,file.z), simple_rgb_texture(shape)));
+    return true;
 }
 
-const std::map<std::string, void (*)(Parser::File&, const libconfig::Setting&)> FIGURES = {
+const std::map<std::string, bool (*)(Parser::File&, const libconfig::Setting&)> FIGURES = {
     {"sphere", create_sphere},
     {"triangle", create_triangle},
     {"plane", create_plane},
@@ -169,16 +209,29 @@ const std::map<std::string, void (*)(Parser::File&, const libconfig::Setting&)> 
 
 void Parser::File::new_element(const libconfig::Setting& s)
 {
+    std::string str;
+    bool hasScale = false;
+
     x = 0; y = 0; z = 0;
+    scale = Math::Vector3D(1, 1, 1);
     s.lookupValue("shape", shapename);
     s.lookupValue("x", x);
     s.lookupValue("y", y);
     s.lookupValue("z", z);
+    if (s.lookupValue("scale", str)) {
+        if (!get_vector(str, scale))
+            std::cerr << "Couldn't parse '" << str << "' as a scaling vector" << std::endl;
+        else
+            hasScale = true;
+    }
     if (FIGURES.find(shapename) == FIGURES.end()) {
         std::cerr << "unknown shape: " << shapename << std::endl;
         exit(84);
     }
-    FIGURES.at(shapename)(*this, s);
+    if (!FIGURES.at(shapename)(*this, s))
+        return;
+    if (hasScale)
+        shapes.back()->getScale() = scale;
 }
 
 void Parser::File::manage_camera(const libconfig::Setting& c)

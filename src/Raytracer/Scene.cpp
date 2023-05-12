@@ -13,7 +13,7 @@ Raytracer::HitPointList Raytracer::Scene::rayListPureLights(Raytracer::Ray \
     Raytracer::HitPointList hitPointList;
 
     for (auto const &shape: shapes)
-        for (auto const &hitpoint: shape->hitPoints(ray))
+        for (auto const &hitpoint: shape->computeHitPoints(ray))
             if (hitpoint.distance >= 0.0001)
                 hitPointList.push_back(hitpoint);
     hitPointList.sort();
@@ -28,7 +28,7 @@ Raytracer::HitPointList Raytracer::Scene::rayListCollisions(Raytracer::Ray \
     for (auto const &shape: shapes) {
         if (shape->isPureLight())
             continue;
-        for (auto const &hitpoint: shape->hitPoints(ray)) {
+        for (auto const &hitpoint: shape->computeHitPoints(ray)) {
             if (hitpoint.distance >= 0.0001 && !hitpoint.texture.isPureLight)
                 hitPointList.push_back(hitpoint);
         }

@@ -24,8 +24,14 @@ public:
     virtual bool hits(Raytracer::Ray const &ray) const = 0;
     virtual Raytracer::HitPointList hitPoints(Raytracer::Ray const &ray) \
         const = 0;
+    virtual Raytracer::HitPointList computeHitPoints(Raytracer::Ray const \
+        &ray) const = 0;
+    virtual Raytracer::HitPointList computeHitPoints(Raytracer::Ray const \
+        &ray, Math::Vector3D additionalScale) const = 0;
     //
     virtual Math::Point3D getCenter(void) const = 0;
+    virtual Math::Vector3D &getScale(void) = 0;
+    virtual Math::Vector3D getScale(void) const = 0;
     //
     virtual Raytracer::Texture texture(void) = 0;
     virtual Raytracer::Texture texture(void) const = 0;

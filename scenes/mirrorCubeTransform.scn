@@ -12,6 +12,7 @@ scene =
             shape = "sphere";
             radius = 0.4;
             color = "1 1 1";
+            scale = "0.3";
         },
         {
             shape = "ambiant_light";
