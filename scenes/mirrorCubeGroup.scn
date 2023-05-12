@@ -42,20 +42,18 @@ scene =
                 }
             );
         },
+//        {
+//            shape = "ambiant_light";
+//            z = 1.9;
+//            light = "1 1 1";
+//        },
         {
-            shape = "ambiant_light";
+            shape = "directional_light";
             z = 1.9;
             light = "1 1 1";
+            direction = "0 0 -1";
+            foi = 250;
         },
-//        {
-//            shape = "sphere";
-//            x = 0;
-//            y = 0;
-//            z = 2;
-//            radius = 0.5;
-//            color = "1 1 1";
-//            light = "1 1 1 1.0";
-//        },
         {
             shape = "plane";
             z = 2;

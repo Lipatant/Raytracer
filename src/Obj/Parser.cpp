@@ -198,6 +198,25 @@ static bool create_ambiant_light(Parser::File& file, const libconfig::Setting& s
     return true;
 }
 
+static bool create_directional_light(Parser::File& file, const libconfig::Setting& shape)
+{
+    std::string str;
+    Math::Vector3D direction(0, 0, -1);
+    Shape::DirectionalLightFOI foi = 90;
+
+    try {
+        if (shape.lookupValue("direction", str))
+            if (!get_vector(str, direction))
+                std::cerr << "Couldn't parse '" << str << "' as a vector" << std::endl;
+        shape.lookupValue("foi", foi);
+        file.shapes.push_back(Shape::createShape<Shape::DirectionalLight>(Math::Point3D(file.x,file.y,file.z), direction, foi, simple_rgb_texture(shape)));
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        file.shapes.push_back((Shape::createShape<Shape::Plane>( \
+            Math::Point3D(), Math::Vector3D(), Math::Vector3D(), Raytracer::Texture())));
+    }
+    return true;
+}
 
 static bool create_group(Parser::File& file, const libconfig::Setting& shape)
 {
@@ -227,6 +246,9 @@ const std::map<std::string, bool (*)(Parser::File&, const libconfig::Setting&)> 
     {"ambiantLight", create_ambiant_light},
     {"ambiant", create_ambiant_light},
     {"light", create_ambiant_light},
+    {"directionalLight", create_directional_light},
+    {"directional_light", create_directional_light},
+    {"directional", create_directional_light},
     {"group", create_group},
 };
 
