@@ -136,15 +136,15 @@ static void create_triangle(Parser::File& file, const libconfig::Setting& shape)
     int y2;
     int z2;
     try {
-    shape.lookupValue("x1", x1);
-    shape.lookupValue("y1", y1);
-    shape.lookupValue("z1", z1);
-    shape.lookupValue("x2", x2);
-    shape.lookupValue("y2", y2);
-    shape.lookupValue("z2", z2);
-    file.shapes.push_back(Shape::createShape<Shape::Triangle>( \
-        Math::Point3D(file.x,file.y,file.z), Math::Point3D(x1, y1, z1), Math::Point3D(x2,y2,z2), \
-        generate_texture(shape)));
+        shape.lookupValue("x1", x1);
+        shape.lookupValue("y1", y1);
+        shape.lookupValue("z1", z1);
+        shape.lookupValue("x2", x2);
+        shape.lookupValue("y2", y2);
+        shape.lookupValue("z2", z2);
+        file.shapes.push_back(Shape::createShape<Shape::Triangle>( \
+            Math::Point3D(file.x,file.y,file.z), Math::Point3D(x1, y1, z1), Math::Point3D(x2,y2,z2), \
+            generate_texture(shape)));
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
         file.shapes.push_back(Shape::createShape<Shape::Triangle>( \
@@ -179,10 +179,44 @@ static void create_plane(Parser::File& file, const libconfig::Setting& shape)
     }
 }
 
+static Raytracer::Color generateColor(const libconfig::Setting& shape)
+{
+    double r;
+    double g;
+    double b;
+    double a;
+    std::string tmp;
+    shape.lookupValue("simpleColor", tmp);
+    std::stringstream ss(tmp);
+    ss >> tmp;
+    r = stod(tmp);
+    ss >> tmp;
+    g = stod(tmp);
+    ss >> tmp;
+    b = stod(tmp);
+    try {
+        ss >> tmp;
+        a = stod(tmp);
+        return Raytracer::Color(r, g, b, a);
+    } catch (std::exception &e) {
+        return Raytracer::Color(r, g, b);
+    }
+}
+
+static void create_ambiant_light(Parser::File& file, const libconfig::Setting& shape)
+{
+    std::string c;
+
+    if (shape.lookupValue("simpleColor", c))
+        file.shapes.push_back(Shape::createShape<Shape::AmbientLight>(Math::Point3D(file.x,file.y,file.z), generateColor(shape)));
+    file.shapes.push_back(Shape::createShape<Shape::AmbientLight>(Math::Point3D(file.x,file.y,file.z), generate_texture(shape)));
+}
+
 const std::map<std::string, void (*)(Parser::File&, const libconfig::Setting&)> FIGURES = {
     {"sphere", create_sphere},
     {"triangle", create_triangle},
     {"plane", create_plane},
+    {"ambiantLight", create_ambiant_light}
 };
 
 void Parser::File::new_element(const libconfig::Setting& s)
@@ -242,7 +276,7 @@ void Parser::File::parseFile(const char *filepath)
     try {
         cfg.readFile(filepath);
     } catch(const libconfig::FileIOException &fio) {
-        std::cerr << "Error reading: " << std::endl;
+        std::cerr << "Error reading: " << fio.what() << std::endl;
         exit(84);
     } catch(const libconfig::ParseException &pex) {
         std::cerr << "Error parsing at line " << pex.getLine() << ": " << pex.getError() << std::endl;
