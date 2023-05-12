@@ -15,13 +15,13 @@
 #include "Utility/Regex.hpp"
 
 #define COLOR_RGB_REGEX \
-    "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+    "^\\s*-?\\d+(|\\.\\d+)\\s+-?\\d(|\\.\\d+)\\s+-?\\d(|\\.\\d+)\\s*$"
 #define COLOR_RGBA_REGEX \
-    "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+    "^\\s*-?\\d+(|\\.\\d+)\\s+-?\\d(|\\.\\d+)\\s+-?\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
 #define VECTOR_REGEX \
-    "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+    "^\\s*-?\\d+(|\\.\\d+)\\s+-?\\d(|\\.\\d+)\\s+-?\\d(|\\.\\d+)\\s*$"
 #define DOUBLE_REGEX \
-    "^\\s*\\d+(|\\.\\d+)\\s*$"
+    "^\\s*-?\\d+(|\\.\\d+)\\s*$"
 
 static bool get_vector(std::string const &str, Math::Vector3D &vector)
 {

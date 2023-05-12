@@ -11,6 +11,7 @@
 
 static void assignFov(Arg::Argument &arg, std::string const &value)
 {
+    arg.isFovSet = true;
     arg.fov = std::stod(value);
 }
 

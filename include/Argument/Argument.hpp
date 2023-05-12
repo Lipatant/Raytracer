@@ -14,6 +14,7 @@ class Argument {
 public:
     bool askUsage = false;
     double fov = 90;
+    bool isFovSet = false;
     std::size_t width = 680;
     std::size_t height = 400;
     std::size_t rebound = 10;

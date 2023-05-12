@@ -52,10 +52,13 @@ int main(int const ac, char * const * const av)
         return 84;
     if (Arg::INPUT.askUsage)
         return displayUsage(std::cout);
+    fileScene.parseFile(Arg::INPUT.fileScene.c_str());
     scene.camera.width = Arg::INPUT.width;
     scene.camera.height = Arg::INPUT.height;
-    scene.camera.fov = Arg::INPUT.fov;
-    fileScene.parseFile(Arg::INPUT.fileScene.c_str());
+    if (Arg::INPUT.isFovSet)
+        scene.camera.fov = Arg::INPUT.fov;
+    else
+        scene.camera.fov = fileScene.fov;
     scene.shapes.splice(scene.shapes.end(), fileScene.shapes);
     scene.camera.position = fileScene.camPos;
     scene.camera.rotation = fileScene.camRot;
