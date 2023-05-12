@@ -2,8 +2,10 @@
 ## EPITECH PROJECT, 2023
 ## Makefile
 ## File description:
-## Makefile de Raytracer
+## Makefile of Raytracer
 ##
+
+SR	=	src/
 
 SRC	=	$(shell cat make/math.txt | tr '\n' ' ')							\
 		$(shell cat make/shape.txt | tr '\n' ' ')							\
@@ -12,11 +14,13 @@ SRC	=	$(shell cat make/math.txt | tr '\n' ' ')							\
 		$(shell cat make/arguments.txt | tr '\n' ' ')						\
 		$(shell cat make/parser.txt | tr '\n' ' ')							\
 
+SRC_UT		=	tests/tests.cpp			\
+
 BUILDDIR = build
 
 OBJ = $(patsubst %.cpp, $(BUILDDIR)/%.o, $(SRC))
 
-$(BUILDDIR)/%.o: 	src/%.cpp
+$(BUILDDIR)/%.o: 	$(SR)%.cpp
 	@mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
@@ -35,11 +39,6 @@ GCCFLAG	=	g++ -o
 FDEBUG	=	-g3
 
 LOGSFILE	=	logs.txt
-
-SRC_UT		=	src/Module/Module.cpp		\
-				src/Module/CpuModule.cpp	\
-
-SRC_TU		=	tests/tests.cpp	\
 
 CC			=	g++
 
@@ -90,7 +89,7 @@ play_re: re
 	./$(NAME)
 
 tests_run: fclean
-		$(CC) -o $(UT) $(CFLAGS_UT) $(CPPFLAGS_UT) \
+		$(CC) -o $(UT) $(SRC_UT) $(CFLAGS_UT) $(CPPFLAGS_UT) \
 			$(LCRITERION) $(CPPFLAGS_UT)
 		./$(UT)
 
