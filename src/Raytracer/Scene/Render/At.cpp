@@ -31,6 +31,8 @@ static Raytracer::CameraDirection getCameraDirection(Raytracer::Camera \
     camera, std::size_t const x, std::size_t const y)
 {
     if (Arg::INPUT.angularcamera) return getDirection(camera, x, y);
+    Raytracer::CameraRotation cameraRotation(camera.rotation);
+    cameraRotation.y *= -1;
     double ratio = static_cast<double>(camera.height) / camera.width;
     double ratioWidth = (camera.width > 1) ? \
         (static_cast<double>(x) / (camera.width - 1)) : (0.5);
@@ -41,9 +43,10 @@ static Raytracer::CameraDirection getCameraDirection(Raytracer::Camera \
     Raytracer::CameraDirection base(1, width * -0.5, height * -0.5);
     Raytracer::CameraPosition point2D(base + Raytracer::CameraPosition(0, \
         width * ratioWidth, height * ratioHeight));
-    Raytracer::CameraDirection frontBack(camera.direction().normalized());
+    Raytracer::CameraDirection frontBack( \
+        cameraRotation.direction().normalized());
     Raytracer::CameraDirection downUp(Raytracer::CameraRotation( \
-        camera.rotation + \
+        cameraRotation + \
         Raytracer::CameraRotation(0,90)).direction().normalized());
     Raytracer::CameraDirection leftRight(frontBack.cross(downUp));
     leftRight.normalize();
