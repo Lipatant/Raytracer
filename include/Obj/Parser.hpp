@@ -22,18 +22,7 @@ namespace Parser
             int x;
             int y;
             int z;
-            double Textr = 0;
-            double Textg = 0;
-            double Textb = 0;
-            double Texta = 1.0;
-            double Text1r = 0;
-            double Text1g = 0;
-            double Text1b = 0;
-            double Text1a = 1.0;
-            double Text2r = 0;
-            double Text2g = 0;
-            double Text2b = 0;
-            double Text2a = 0.0;
+            int fov = 90;
             Math::Point3D camPos;
             Math::Angle3D camRot;
             File(void){}
