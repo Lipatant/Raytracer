@@ -14,7 +14,7 @@ SRC	=	$(shell cat make/math.txt | tr '\n' ' ')							\
 		$(shell cat make/arguments.txt | tr '\n' ' ')						\
 		$(shell cat make/parser.txt | tr '\n' ' ')							\
 
-SRC_UT		=	tests/tests.cpp			\
+SRC_UT		=	tests/Unit_tests.cpp			\
 
 BUILDDIR = build
 

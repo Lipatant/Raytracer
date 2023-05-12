@@ -2,7 +2,7 @@
   
 The repository for the Raytracer project.  
   
-<img src="doc/raytracer.gif" alt="demonstration Raytracer" width="680" height="400">  
+<img src="doc/Raytracer.gif" alt="demonstration Raytracer" width="680" height="400">  
   
   
 ---  
