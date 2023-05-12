@@ -62,6 +62,7 @@ Raytracer::HitPointList Shape::AShape::computeHitPoints(Raytracer::Ray const \
 Raytracer::HitPointList Shape::AShape::computeHitPoints(Raytracer::Ray const \
     &ray, Math::Vector3D additionalScale) const
 {
+    return hitPoints(ray); // FORCED END OF FUNCTION
     Math::Vector3D newScale(_scale * additionalScale);
     if (newScale == Math::Vector3D(1, 1, 1)) return hitPoints(ray);
     Raytracer::Ray newRay(ray);

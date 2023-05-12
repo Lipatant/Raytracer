@@ -33,5 +33,6 @@ namespace Parser
             void new_element(const libconfig::Setting& shape);
             void manage_camera(const libconfig::Setting &cam);
             void generate_scene(libconfig::Config &cfg);
+
     };
 }

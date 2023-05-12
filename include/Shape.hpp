@@ -9,6 +9,7 @@
 #include "Shape/AmbientLight.hpp"
 #include "Shape/AShape.hpp"
 #include "Shape/DirectionalLight.hpp"
+#include "Shape/Group.hpp"
 #include "Shape/IShape.hpp"
 #include "Shape/Plane.hpp"
 #include "Shape/Sphere.hpp"

@@ -7,6 +7,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <list>
 #include <map>
 #include <sstream>
 #include <string>
@@ -197,6 +198,27 @@ static bool create_ambiant_light(Parser::File& file, const libconfig::Setting& s
     return true;
 }
 
+
+static bool create_group(Parser::File& file, const libconfig::Setting& shape)
+{
+    const libconfig::Setting& sList = shape.lookup("shapes");
+    Parser::File newFile;
+
+    try {
+        for (int i = 0; i < sList.getLength(); ++i) {
+            const libconfig::Setting& newShape = sList[i];
+            newFile.new_element(newShape);
+        }
+        file.shapes.push_back(Shape::createShape<Shape::Group>( \
+            Math::Point3D(file.x, file.y, file.z), newFile.shapes));
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        file.shapes.push_back(Shape::createShape<Shape::Group>(Math::Point3D \
+            (file.x, file.y, file.z)));
+    }
+    return true;
+}
+
 const std::map<std::string, bool (*)(Parser::File&, const libconfig::Setting&)> FIGURES = {
     {"sphere", create_sphere},
     {"triangle", create_triangle},
@@ -205,12 +227,14 @@ const std::map<std::string, bool (*)(Parser::File&, const libconfig::Setting&)> 
     {"ambiantLight", create_ambiant_light},
     {"ambiant", create_ambiant_light},
     {"light", create_ambiant_light},
+    {"group", create_group},
 };
 
 void Parser::File::new_element(const libconfig::Setting& s)
 {
     std::string str;
     bool hasScale = false;
+    Shape::Shape shape;
 
     x = 0; y = 0; z = 0;
     scale = Math::Vector3D(1, 1, 1);
