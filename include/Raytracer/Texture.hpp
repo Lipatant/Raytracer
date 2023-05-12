@@ -11,6 +11,8 @@
 //#include "Raytracer/TextureReflection.hpp"
 
 #define RAYTRACER_TEXTURE_LIGHT_DEFAULT_VALUES 0, 0, 0, 0
+#define RAYTRACER_TEXTURE_MIRROR_VALUE_DEFAULT \
+    Raytracer::TextureMirrorValueMinimum
 
 namespace Raytracer {
 
@@ -22,7 +24,7 @@ class Texture {
 public: // Main Attributes
     Raytracer::Color color;
     Raytracer::Color light;
-    double mirrorValue = Raytracer::ColorValueMinimum;
+    double mirrorValue = Raytracer::TextureMirrorValueMinimum;
     bool isPureLight = false;
 public:
     Texture(void);

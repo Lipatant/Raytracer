@@ -19,10 +19,10 @@ namespace Parser
     class File {
         public:
             std::string shapename;
-            int x;
-            int y;
-            int z;
-            int fov = 90;
+            Math::Point3DValue x = 0;
+            Math::Point3DValue y = 0;
+            Math::Point3DValue z = 0;
+            double fov = 90;
             Math::Point3D camPos;
             Math::Angle3D camRot;
             File(void){}

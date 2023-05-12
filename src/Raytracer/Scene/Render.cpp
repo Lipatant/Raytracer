@@ -90,6 +90,15 @@ Raytracer::Display Raytracer::Scene::render(void)
     StaticHere::Display status(displayWidth);
     bool displayInConsole = !Arg::INPUT.noConsole;
 
+    if (!Arg::INPUT.angularcamera) {
+        Raytracer::CameraRotation cameraRotation(camera.rotation);
+        cameraRotation.y *= -1;
+        camera.frontBack = cameraRotation.direction().normalized();
+        camera.downUp = Raytracer::CameraRotation(cameraRotation + \
+            Raytracer::CameraRotation(0,90)).direction().normalized();
+        camera.leftRight = camera.frontBack.cross(camera.downUp);
+        camera.leftRight.normalize();
+    }
     std::srand(std::time(nullptr));
     camera.rotation.normalize();
     if (shapes.size() < 1)

@@ -1,0 +1,98 @@
+scene =
+{
+    camera = {
+        posx = -1.9;
+        posy = 0.0;
+        posz = 0.0;
+        angle1 = 0;
+        angle2 = 0;
+    };
+    shapes = (
+        {
+            shape = "sphere";
+            radius = 0.4;
+            color = "1 1 1";
+        },
+        {
+            shape = "ambiant_light";
+            z = 1.9;
+            light = "1 1 1";
+        },
+//        {
+//            shape = "sphere";
+//            x = 0;
+//            y = 0;
+//            z = 2;
+//            radius = 0.5;
+//            color = "1 1 1";
+//            light = "1 1 1 1.0";
+//        },
+        {
+            shape = "plane";
+            z = 2;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 1;
+            vectz2 = 0;
+            color = "1.0 1.0 1.0";
+//            light = "1.0 1.0 1.0 0.2";
+        },
+        {
+            shape = "plane";
+            z = -2;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 1;
+            vectz2 = 0;
+            color = "1 1 1";
+        },
+        {
+            shape = "plane";
+            x = 2;
+            vectx1 = 0;
+            vecty1 = 1;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "0.5 0.5 1.0";
+        },
+        {
+            shape = "plane";
+            x = -2;
+            vectx1 = 0;
+            vecty1 = 1;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "1.0 1.0 1.0";
+        },
+        {
+            shape = "plane";
+            y = -2;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "1.0 0.5 0.5";
+        },
+        {
+            shape = "plane";
+            y = 2;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "0.5 1 0.5"
+        }
+    );
+};

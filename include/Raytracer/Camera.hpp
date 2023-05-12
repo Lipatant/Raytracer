@@ -31,6 +31,10 @@ public: // Main Attributes
     double fov = 90;
     std::size_t width = 1920;
     std::size_t height = 1080;
+public: // Additional Main Attributes but not set directly by the class
+    Raytracer::CameraDirection frontBack;
+    Raytracer::CameraDirection downUp;
+    Raytracer::CameraDirection leftRight;
 public:
     Camera(void);
     Camera(Raytracer::CameraPosition const position);

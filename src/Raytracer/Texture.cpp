@@ -7,11 +7,12 @@
 
 #include "Raytracer/Texture.hpp"
 
-Raytracer::Texture::Texture(void)
+Raytracer::Texture::Texture(void) : \
+    light(RAYTRACER_TEXTURE_LIGHT_DEFAULT_VALUES)
 { }
 
 Raytracer::Texture::Texture(Raytracer::TextureMirrorValue const mirrorValue) :
-    mirrorValue(mirrorValue)
+     light(RAYTRACER_TEXTURE_LIGHT_DEFAULT_VALUES), mirrorValue(mirrorValue)
 { }
 
 Raytracer::Texture::Texture(Raytracer::Color const &color) :

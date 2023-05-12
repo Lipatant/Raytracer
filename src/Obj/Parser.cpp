@@ -4,112 +4,85 @@
 #include <map>
 #include "Obj/Parser.hpp"
 #include <iostream>
+#include "Utility/Regex.hpp"
+
+#define COLOR_RGB_REGEX \
+    "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+#define COLOR_RGBA_REGEX \
+    "^\\s*\\d+(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s+\\d(|\\.\\d+)\\s*$"
+
+static bool get_color(std::string const &str, Raytracer::Color &color)
+{
+    std::string tmp;
+
+    if (utility::regex::quickTest(str, COLOR_RGB_REGEX)) {
+        std::stringstream ss1(str);
+        ss1 >> tmp;
+        color.r = stod(tmp);
+        ss1 >> tmp;
+        color.g = stod(tmp);
+        ss1 >> tmp;
+        color.b = stod(tmp);
+        color.a = Raytracer::ColorValueMaximum;
+        return true;
+    }
+    if (utility::regex::quickTest(str, COLOR_RGBA_REGEX)) {
+        std::stringstream ss1(str);
+        ss1 >> tmp;
+        color.r = stod(tmp);
+        ss1 >> tmp;
+        color.g = stod(tmp);
+        ss1 >> tmp;
+        color.b = stod(tmp);
+        ss1 >> tmp;
+        color.a = stod(tmp);
+        return true;
+    }
+    return false;
+}
 
 static Raytracer::Texture double_rgb_texture(const libconfig::Setting& shape)
 {
-    double r1 = 0.0;
-    double g1 = 0.0;
-    double b1 = 0.0;
-    double r2 = 0.0;
-    double g2 = 0.0;
-    double b2 = 0.0;
-    double a2 = 1.0;
-    double mirror = 0.0;
-    std::string rgb1;
-    std::string rgba2;
+    std::string str;
     std::string tmp;
+    Raytracer::Color color;
+    Raytracer::Color light(RAYTRACER_TEXTURE_LIGHT_DEFAULT_VALUES);
+    Raytracer::TextureMirrorValue mirror = \
+        RAYTRACER_TEXTURE_MIRROR_VALUE_DEFAULT;
 
     try {
-        shape.lookupValue("color", rgb1);
-        shape.lookupValue("light", rgba2);
-
-        std::stringstream ss1(rgb1);
-        ss1 >> tmp;
-        r1 = stod(tmp);
-        ss1 >> tmp;
-        g1 = stod(tmp);
-        ss1 >> tmp;
-        b1 = stod(tmp);
-
-        std::stringstream ss2(rgba2);
-        ss2 >> tmp;
-        r2 = stod(tmp);
-        ss2 >> tmp;
-        g2 = stod(tmp);
-        ss2 >> tmp;
-        b2 = stod(tmp);
-        ss2 >> tmp;
-        a2 = stod(tmp);
-
-        if (shape.lookupValue("mirror", mirror))
-            return Raytracer::Texture(Raytracer::Color(r1, g1, b1), Raytracer::Color(r2, g2, b2, a2), mirror);
-        return Raytracer::Texture(Raytracer::Color(r1, g1, b1), Raytracer::Color(r2, g2, b2, a2));
+        if (shape.lookupValue("color", str))
+            if (!get_color(str, color))
+                std::cerr << "Couldn't parse '" << str << " as a color" << std::endl;
+        if (shape.lookupValue("light", str))
+            if (!get_color(str, light))
+                std::cerr << "Couldn't parse '" << str << " as a light" << std::endl;
+        shape.lookupValue("mirror", mirror);
+        return Raytracer::Texture(color, light, mirror);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
-    return Raytracer::Texture();
+    return Raytracer::Texture(color, light, mirror);
 }
 
-static Raytracer::Texture simple_rgb_texture(std::string rgb, const libconfig::Setting& shape)
+static Raytracer::Color simple_rgb_texture(const libconfig::Setting& shape)
 {
-    double r;
-    double g;
-    double b;
-    double mirror;
+    std::string str;
     std::string tmp;
-    std::stringstream ss(rgb);
+    Raytracer::Color color;
+
     try {
-        ss >> tmp;
-        r = stod(tmp);
-        ss >> tmp;
-        g = stod(tmp);
-        ss >> tmp;
-        b = stod(tmp);
-    } catch (std::invalid_argument& e) {
-        std::cerr << "Invalid argument: " << e.what() << std::endl;
-        return Raytracer::Texture();
+        if (shape.lookupValue("color", str))
+            if (!get_color(str, color))
+                std::cerr << "Couldn't parse '" << str << " as a color/light" << std::endl;
+        if (shape.lookupValue("light", str))
+            if (!get_color(str, color))
+                std::cerr << "Couldn't parse '" << str << " as a color/light" << std::endl;
+        return color;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
-    if (shape.lookupValue("mirror", mirror))
-        return Raytracer::Texture(Raytracer::Color(r, g, b), mirror);
-    return Raytracer::Texture(Raytracer::Color(r, g, b));
-}
-
-static Raytracer::Texture simple_rgba_texture(std::string rgb, const libconfig::Setting& shape)
-{
-    double r;
-    double g;
-    double b;
-    double a;
-    double mirror;
-    std::string tmp;
-    std::stringstream ss(rgb);
-    try {
-        ss >> tmp;
-        r = stod(tmp);
-        ss >> tmp;
-        g = stod(tmp);
-        ss >> tmp;
-        b = stod(tmp);
-        ss >> tmp;
-        a = stod(tmp);
-    } catch (std::invalid_argument& e) {
-        std::cerr << "Invalid argument: " << e.what() << std::endl;
-        return Raytracer::Texture();
-    }
-    if (shape.lookupValue("mirror", mirror))
-        return Raytracer::Texture(Raytracer::Color(r, g, b, a), mirror);
-    return Raytracer::Texture(Raytracer::Color(r, g, b, a));
-}
-
-static Raytracer::Texture generate_texture(const libconfig::Setting& shape)
-{
-    std::string type_text;
-
-    if (shape.lookupValue("rgb", type_text))
-        return simple_rgb_texture(type_text, shape);
-    else if (shape.lookupValue("rgba", type_text))
-        return simple_rgba_texture(type_text, shape);
-    return double_rgb_texture(shape);
+    return color;
 }
 
 static void create_sphere(Parser::File& file, const libconfig::Setting& shape)
@@ -119,7 +92,7 @@ static void create_sphere(Parser::File& file, const libconfig::Setting& shape)
     try {
     shape.lookupValue("radius", radius);
     file.shapes.push_back(Shape::createShape<Shape::Sphere>( \
-        Math::Point3D(file.x,file.y,file.z), radius, generate_texture(shape)));
+        Math::Point3D(file.x,file.y,file.z), radius, double_rgb_texture(shape)));
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
         file.shapes.push_back(Shape::createShape<Shape::Sphere>( \
@@ -144,7 +117,7 @@ static void create_triangle(Parser::File& file, const libconfig::Setting& shape)
         shape.lookupValue("z2", z2);
         file.shapes.push_back(Shape::createShape<Shape::Triangle>( \
             Math::Point3D(file.x,file.y,file.z), Math::Point3D(x1, y1, z1), Math::Point3D(x2,y2,z2), \
-            generate_texture(shape)));
+            double_rgb_texture(shape)));
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
         file.shapes.push_back(Shape::createShape<Shape::Triangle>( \
@@ -171,7 +144,7 @@ static void create_plane(Parser::File& file, const libconfig::Setting& shape)
             Math::Point3D(file.x,file.y,file.z),
             Math::Vector3D(vectx1,vecty1,vectz1),
             Math::Vector3D(vectx2,vecty2,vectz2),
-            generate_texture(shape)));
+            double_rgb_texture(shape)));
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         file.shapes.push_back((Shape::createShape<Shape::Plane>( \
@@ -179,48 +152,24 @@ static void create_plane(Parser::File& file, const libconfig::Setting& shape)
     }
 }
 
-static Raytracer::Color generateColor(const libconfig::Setting& shape)
-{
-    double r;
-    double g;
-    double b;
-    double a;
-    std::string tmp;
-    shape.lookupValue("simpleColor", tmp);
-    std::stringstream ss(tmp);
-    ss >> tmp;
-    r = stod(tmp);
-    ss >> tmp;
-    g = stod(tmp);
-    ss >> tmp;
-    b = stod(tmp);
-    try {
-        ss >> tmp;
-        a = stod(tmp);
-        return Raytracer::Color(r, g, b, a);
-    } catch (std::exception &e) {
-        return Raytracer::Color(r, g, b);
-    }
-}
-
 static void create_ambiant_light(Parser::File& file, const libconfig::Setting& shape)
 {
-    std::string c;
-
-    if (shape.lookupValue("simpleColor", c))
-        file.shapes.push_back(Shape::createShape<Shape::AmbientLight>(Math::Point3D(file.x,file.y,file.z), generateColor(shape)));
-    file.shapes.push_back(Shape::createShape<Shape::AmbientLight>(Math::Point3D(file.x,file.y,file.z), generate_texture(shape)));
+    file.shapes.push_back(Shape::createShape<Shape::AmbientLight>(Math::Point3D(file.x,file.y,file.z), simple_rgb_texture(shape)));
 }
 
 const std::map<std::string, void (*)(Parser::File&, const libconfig::Setting&)> FIGURES = {
     {"sphere", create_sphere},
     {"triangle", create_triangle},
     {"plane", create_plane},
-    {"ambiantLight", create_ambiant_light}
+    {"ambiant_light", create_ambiant_light},
+    {"ambiantLight", create_ambiant_light},
+    {"ambiant", create_ambiant_light},
+    {"light", create_ambiant_light},
 };
 
 void Parser::File::new_element(const libconfig::Setting& s)
 {
+    x = 0; y = 0; z = 0;
     s.lookupValue("shape", shapename);
     s.lookupValue("x", x);
     s.lookupValue("y", y);
@@ -274,6 +223,7 @@ void Parser::File::parseFile(const char *filepath)
     libconfig::Config cfg;
 
     try {
+        cfg.setAutoConvert(true);
         cfg.readFile(filepath);
     } catch(const libconfig::FileIOException &fio) {
         std::cerr << "Error reading: " << fio.what() << std::endl;
