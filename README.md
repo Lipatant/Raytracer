@@ -1,4 +1,4 @@
-# The Raytracer Project
+# Raytracer - Epitech Project
 
 The repository for the Raytracer project.
 
@@ -10,10 +10,10 @@ The repository for the Raytracer project.
 
 ## Table of contents
 
-[1. The purpose of the project](#titre1)
-[2. How to use Raytracer](#titre2)
-[3. How to launch](#titre3)
-[4. People on the project](#titre4)
+[1. The purpose of the project](#titre1)<br />
+[2. How to use Raytracer](#titre2)<br />
+[3. How to launch](#titre3)<br />
+[4. People on the project](#titre4)<br />
 
 
 ---
@@ -259,27 +259,27 @@ To run the project:
 
 THE arguments to return which are the following:
 
---blending or -b for Blending, this allows us to overlay all the scene possibilities
+--blending or -b for Blending, which overlays the scene possibilities
 
 <img src="savedTests/blendingAnimation1.gif">
 
---fov or -f for Field Of View, this allows us to give the fov of the scene
+--fov or -f for Field Of View, which changes the fov of the scene
 
 <img src="savedTests/cameraAngleAnimation2.gif">
 
---height or -h for Height, this allows us to give the size we want for our scene
+--height or -h for Height, which changes the size we want for our scene
 
-<img src="savedTests/4k1.ppm">
+<img src="savedTests/4k1.png">
 
---width or -w for Width, which allows us to give the width of our scene
+--width or -w for Width, which changes the width of our scene
 
-<img src="savedTests/4k2.ppm">
+<img src="savedTests/4k2.png">
 
---out or -o for Out, for the file that will be rendered in 3D
+--out or -o for Out, which changes the output file name
 
-<img src="savedTests/fullHDLandscape.ppm">
+<img src="savedTests/fullHDLandscape.png">
 
---rebound or -r for Rebound, that allows us to choose the number of bounce of the light
+--rebound or -r for Rebound, which changes the number of bounce of the light
 
 <img src="savedTests/reboundAnimation1.gif">
 
