@@ -21,10 +21,13 @@ The repository for the Raytracer project.
 
 ## <a id="titre1"></a>1. The purpose of the project
 
-Raytracing is a 3D rendering technique used in computer graphics. This technique consists
-of simulating the propagation of light in a virtual scene by tracing light rays from the
+Raytracing is a 3D rendering technique used in computer graphics.
+
+This technique consists of simulating the propagation of light in a virtual scene by tracing light rays from the
 camera or a light source and calculating their interaction with the objects in the scene.
+
 The result is a realistic image with very realistic light effects, reflections, refractions and shadows.
+
 Your goal is to create a program able to generate an image from a file describing the scene.
 
 Duration: one month
@@ -44,15 +47,6 @@ group number: 3-4
 To use Raytracer you need a configuration file like the following:
 
 ```cpp
-
-/*example.cfg: An example configuration file that stores information about a store. */
-
-// Basic store information:
-
-// version
-//shape x y z width height r g b
-
-
 scene =
 {
     camera = {
@@ -167,7 +161,6 @@ scene =
         }
     );
 };
-
 ```
 
 When creating the camera, you must define:
@@ -273,15 +266,13 @@ The arguments to return which are the following:
 
 --height or -h for Height, which changes the size we want for our scene
 
-<img src="../savedTests/4k1.ppm">
+<img src="../savedTests/4k1.png" width="680" height="400">
 
 --width or -w for Width, which changes the width of our scene
 
-<img src="../savedTests/4k2.ppm">
+<img src="../savedTests/4k2.png" width="680" height="400">
 
 --out or -o for Out, which changes the output file name
-
-<img src="../savedTests/fullHDLandscape.ppm">
 
 --rebound or -r for Rebound, which changes the number of bounce of the light
 
