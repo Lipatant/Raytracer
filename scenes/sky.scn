@@ -6,7 +6,7 @@ scene =
         posz = 0.0;
         angle1 = 0;
         angle2 = 0;
-        skybox = "1 1 1 0.2";
+        skybox = "1 1 1 0.5";
     };
     shapes = (
         {
