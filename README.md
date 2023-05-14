@@ -258,8 +258,6 @@ THE arguments to return which are the following:
 
 --fov or -f for Field Of View, which changes the fov of the scene
 
-<img src="savedTests/cameraAngleAnimation2.gif">
-
 --height or -h for Height, which changes the size we want for our scene
 
 <img src="savedTests/4k1.png" width="680" height="400">
