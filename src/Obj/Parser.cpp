@@ -319,29 +319,37 @@ void Parser::File::manage_camera(const libconfig::Setting& c)
     Raytracer::Color light(RAYTRACER_TEXTURE_LIGHT_DEFAULT_VALUES);
 
     try {
-        c.lookupValue("posx", posx);
-        c.lookupValue("posy", posy);
-        c.lookupValue("posz", posz);
-        c.lookupValue("angle1", angle1);
-        c.lookupValue("angle2", angle2);
-        if (c.lookupValue("color", str))
+        if (c.lookupValue("posx", posx))
+            camPos.x = posx;
+        if (c.lookupValue("posy", posy))
+            camPos.y = posy;
+        if (c.lookupValue("posz", posz))
+            camPos.z = posz;
+        if (c.lookupValue("angle1", angle1))
+            camRot.x = angle1;
+        if (c.lookupValue("angle2", angle2))
+            camRot.y = angle2;
+        if (c.lookupValue("color", str)) {
             if (!get_color(str, light))
                 std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
-        if (c.lookupValue("sky", str))
+            else
+                skybox = light;
+        }
+        if (c.lookupValue("sky", str)) {
             if (!get_color(str, light))
                 std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
-        if (c.lookupValue("skybox", str))
+            else
+                skybox = light;
+        }
+        if (c.lookupValue("skybox", str)) {
             if (!get_color(str, light))
                 std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
-        camPos = Math::Point3D(posx, posy, posz);
-        camRot = Math::Angle3D(angle1, angle2);
-    } catch (const std::exception& e) {
-        camPos = Math::Point3D();
-        camRot = Math::Angle3D();
-    }
+            else
+                skybox = light;
+        }
+    } catch (const std::exception& e) { }
     if (c.lookupValue("fov", f))
         fov = f;
-    skybox = light;
 }
 
 void Parser::File::generate_scene(libconfig::Config &cfg)
@@ -349,11 +357,16 @@ void Parser::File::generate_scene(libconfig::Config &cfg)
     const libconfig::Setting& s = cfg.lookup("scene.shapes");
     const libconfig::Setting& c = cfg.lookup("scene.camera");
 
+    try {
+        const libconfig::Setting& h = cfg.lookup("scene.inheritance");
+        for (int i = 0; i < h.getLength(); ++i)
+            parseFile(h[i]);
+    } catch (const std::exception& e) { }
+    manage_camera(c);
     for (int i = 0; i < s.getLength(); ++i) {
         const libconfig::Setting& shape = s[i];
         new_element(shape);
     }
-    manage_camera(c);
 }
 
 void Parser::File::parseFile(const char *filepath)
