@@ -1,4 +1,4 @@
-# The Raytracer Project
+# Raytracer - Epitech Project
 
 The repository for the Raytracer project.
 
@@ -10,10 +10,10 @@ The repository for the Raytracer project.
 
 ## Table of contents
 
-[1. The purpose of the project](#titre1)
-[2. How to use Raytracer](#titre2)
-[3. How to launch](#titre3)
-[4. People on the project](#titre4)
+[1. The purpose of the project](#titre1)<br />
+[2. How to use Raytracer](#titre2)<br />
+[3. How to launch](#titre3)<br />
+[4. People on the project](#titre4)<br />
 
 
 ---
@@ -26,6 +26,10 @@ of simulating the propagation of light in a virtual scene by tracing light rays 
 camera or a light source and calculating their interaction with the objects in the scene.
 The result is a realistic image with very realistic light effects, reflections, refractions and shadows.
 Your goal is to create a program able to generate an image from a file describing the scene.
+
+Duration: one month
+Language: C++
+group number: 3-4
 
 <img src="CPP_logo.png" alt="Logo Cpp" width="173" height="173">
 <img src="Raytracer_diagram.png" alt="Raytracer Diagram" width="263" height="173">
@@ -249,6 +253,7 @@ Warning: each undefined value will be replaced by a default value !
 
 To run the project:
 
+
 ```sh
 
 > make
@@ -256,35 +261,35 @@ To run the project:
 
 ```
 
-THE arguments to return which are the following:
+The arguments to return which are the following:
 
---blending or -b for Blending, this allows us to overlay all the scene possibilities
+--blending or -b for Blending, which overlays the scene possibilities
 
-<img src="../savedTests/blendingAnimation1.gif">
+<img src="savedTests/blendingAnimation1.gif">
 
---fov or -f for Field Of View, this allows us to give the fov of the scene
+--fov or -f for Field Of View, which changes the fov of the scene
 
-<img src="../savedTests/cameraAngleAnimation2.gif">
+<img src="savedTests/cameraAngleAnimation2.gif">
 
---height or -h for Height, this allows us to give the size we want for our scene
+--height or -h for Height, which changes the size we want for our scene
 
-<img src="../savedTests/4k1.ppm">
+<img src="savedTests/4k1.ppm">
 
---width or -w for Width, which allows us to give the width of our scene
+--width or -w for Width, which changes the width of our scene
 
-<img src="..savedTests/4k2.ppm">
+<img src="savedTests/4k2.ppm">
 
---out or -o for Out, for the file that will be rendered in 3D
+--out or -o for Out, which changes the output file name
 
-<img src="../savedTests/fullHDLandscape.ppm">
+<img src="savedTests/fullHDLandscape.ppm">
 
---rebound or -r for Rebound, that allows us to choose the number of bounce of the light
+--rebound or -r for Rebound, which changes the number of bounce of the light
 
-<img src="../savedTests/reboundAnimation1.gif">
+<img src="savedTests/reboundAnimation1.gif">
 
 
 
-## <a id="titre4"></a>4. People on the project
+## <a id="titre4"></a>4. Contributors
 
 | [<img src="https://github.com/Cyprien-nguyen-van-vien.png?size=85" width=85><br><sub>Cyprien Nguyen-Van-Vien</sub>](https://github.com/Cyprien-nguyen-van-vien) | [<img src="https://github.com/damienBC.png?size=85" width=85><br><sub>Damien Benais-Captal</sub>](https://github.com/damienBC) | [<img src="https://github.com/Pierrelouisleroy.png?size=85" width=85><br><sub>Pierre-Louis Leroy</sub>](https://github.com/Pierrelouisleroy) | [<img src="https://github.com/Lipatant.png?size=85" width=85><br><sub>Virgile Berrier</sub>](https://github.com/Lipatant)
 | :--: | :--: | :--: | :--: |
