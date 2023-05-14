@@ -109,10 +109,11 @@ bool Shape::Object::_fillObject(std::string const &file, Raytracer::Texture \
 {
     std::ifstream stream(file);
     Math::Point3D currentPoint;
-    Math::Point3D cumulatedCenter;
+    Math::Point3D minimum;
+    Math::Point3D maximum;
+    bool isFirst = true;
     std::vector<Math::Point3D> points;
 
-    std::cerr << texture << std::endl;
     if (!Arg::INPUT.noConsole)
         std::cout << "Reading '" << file << "\'..." << std::endl;
     for (std::string str; std::getline(stream, str);) {
@@ -120,22 +121,30 @@ bool Shape::Object::_fillObject(std::string const &file, Raytracer::Texture \
             continue;
         if (utility::regex::quickTest(str, NEW_POINT_REGEX)) {
             currentPoint = readPoint(str) * _scale;
-            cumulatedCenter += currentPoint;
+            if (isFirst || currentPoint.x > maximum.x)
+                maximum.x = currentPoint.x;
+            if (isFirst || currentPoint.y > maximum.y)
+                maximum.y = currentPoint.y;
+            if (isFirst || currentPoint.z > maximum.z)
+                maximum.z = currentPoint.z;
+            if (isFirst || currentPoint.x < minimum.x)
+                minimum.x = currentPoint.x;
+            if (isFirst || currentPoint.y < minimum.y)
+                minimum.y = currentPoint.y;
+            if (isFirst || currentPoint.z < minimum.z)
+                minimum.z = currentPoint.z;
+            isFirst = false;
             points.push_back(currentPoint);
-//            std::cerr << "VECTOR: '" << str << "' -> " << points.back() << std::endl;
             continue;
         }
         if (utility::regex::quickTest(str, NEW_FACE_REGEX_3)) {
             readFace3(str, points, texture, _shapes);
-//            std::cerr << "FACE3: '" << str << "' -> ??? " << texture << std::endl;
             continue;
         }
-        if (utility::regex::quickTest(str, NEW_FACE_REGEX_4)) {
+        if (utility::regex::quickTest(str, NEW_FACE_REGEX_4))
             readFace4(str, points, texture, _shapes);
-//            std::cerr << "FACE4: '" << str << "' -> ???" << std::endl;
-        }
     }
-    _center -= cumulatedCenter / points.size();
+    _center -= (maximum - minimum) * 0.5;
     return true;
 }
 
