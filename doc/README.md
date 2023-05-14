@@ -265,27 +265,27 @@ The arguments to return which are the following:
 
 --blending or -b for Blending, which overlays the scene possibilities
 
-<img src="savedTests/blendingAnimation1.gif">
+<img src="../savedTests/blendingAnimation1.gif">
 
 --fov or -f for Field Of View, which changes the fov of the scene
 
-<img src="savedTests/cameraAngleAnimation2.gif">
+<img src="../savedTests/cameraAngleAnimation2.gif">
 
 --height or -h for Height, which changes the size we want for our scene
 
-<img src="savedTests/4k1.ppm">
+<img src="../savedTests/4k1.ppm">
 
 --width or -w for Width, which changes the width of our scene
 
-<img src="savedTests/4k2.ppm">
+<img src="../savedTests/4k2.ppm">
 
 --out or -o for Out, which changes the output file name
 
-<img src="savedTests/fullHDLandscape.ppm">
+<img src="../savedTests/fullHDLandscape.ppm">
 
 --rebound or -r for Rebound, which changes the number of bounce of the light
 
-<img src="savedTests/reboundAnimation1.gif">
+<img src="../savedTests/reboundAnimation1.gif">
 
 
 
