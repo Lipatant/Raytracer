@@ -42,7 +42,7 @@ scene =
             vectx2 = 0;
             vecty2 = 1;
             vectz2 = 0;
-            rgb = "1 1 1";
+            color = "1 1 1";
         },
         {
             shape = "plane";
@@ -55,7 +55,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            rgb = "0.5 0.5 1.0";
+            color = "0.5 0.5 1.0";
         },
         {
             shape = "plane";
@@ -68,7 +68,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            rgb = "1.0 1.0 1.0";
+            color = "1.0 1.0 1.0";
         },
         {
             shape = "plane";
@@ -81,7 +81,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            rgb = "1.0 0.5 0.5";
+            color = "1.0 0.5 0.5";
         },
         {
             shape = "plane";
@@ -94,7 +94,7 @@ scene =
             vectx2 = 0;
             vecty2 = 0;
             vectz2 = 1;
-            rgb = "0.5 1 0.5"
+            color = "0.5 1 0.5"
         }
     );
 };
