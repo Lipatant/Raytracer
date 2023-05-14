@@ -164,6 +164,8 @@ scene =
     );
 };
 
+```
+
 When creating the camera, you must define:
 
 >- The coordonates of the camera (posx, posy and posz)
@@ -239,8 +241,6 @@ You can also define a group which contains lany of these shapes using group.
 Warning: if the shape is not defined or invalid, the program will fail!
 Warning: each undefined value will be replaced by a default value !
 
-```
-
 
 ---
 
@@ -263,6 +263,8 @@ THE arguments to return which are the following:
 <img src="../savedTests/blendingAnimation1.gif">
 
 --fov or -f for Field Of View, this allows us to give the fov of the scene
+
+<img src="../savedTests/cameraAngleAnimation2.gif">
 
 --height or -h for Height, this allows us to give the size we want for our scene
 

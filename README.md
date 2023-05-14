@@ -2,7 +2,7 @@
 
 The repository for the Raytracer project.
 
-<img src="Raytracer.gif" alt="demonstration Raytracer" width="680" height="400">
+<img src="doc/Raytracer.gif" alt="demonstration Raytracer" width="680" height="400">
 
 
 ---
@@ -27,9 +27,9 @@ camera or a light source and calculating their interaction with the objects in t
 The result is a realistic image with very realistic light effects, reflections, refractions and shadows.
 Your goal is to create a program able to generate an image from a file describing the scene.
 
-<img src="CPP_logo.png" alt="Logo Cpp" width="173" height="173">
-<img src="Raytracer_diagram.png" alt="Raytracer Diagram" width="263" height="173">
-<img src="Epitech_logo.png" alt="Logo Epitech" width="173" height="173">
+<img src="doc/CPP_logo.png" alt="Logo Cpp" width="173" height="173">
+<img src="doc/Raytracer_diagram.png" alt="Raytracer Diagram" width="263" height="173">
+<img src="doc/Epitech_logo.png" alt="Logo Epitech" width="173" height="173">
 
 
 ---
@@ -164,6 +164,8 @@ scene =
     );
 };
 
+```
+
 When creating the camera, you must define:
 
 >- The coordonates of the camera (posx, posy and posz)
@@ -239,7 +241,6 @@ You can also define a group which contains lany of these shapes using group.
 Warning: if the shape is not defined or invalid, the program will fail!
 Warning: each undefined value will be replaced by a default value !
 
-```
 
 
 ---
@@ -260,25 +261,27 @@ THE arguments to return which are the following:
 
 --blending or -b for Blending, this allows us to overlay all the scene possibilities
 
-<img src="../savedTests/blendingAnimation1.gif">
+<img src="savedTests/blendingAnimation1.gif">
 
 --fov or -f for Field Of View, this allows us to give the fov of the scene
 
+<img src="savedTests/cameraAngleAnimation2.gif">
+
 --height or -h for Height, this allows us to give the size we want for our scene
 
-<img src="../savedTests/4k1.ppm">
+<img src="savedTests/4k1.ppm">
 
 --width or -w for Width, which allows us to give the width of our scene
 
-<img src="..savedTests/4k2.ppm">
+<img src="savedTests/4k2.ppm">
 
 --out or -o for Out, for the file that will be rendered in 3D
 
-<img src="../savedTests/fullHDLandscape.ppm">
+<img src="savedTests/fullHDLandscape.ppm">
 
 --rebound or -r for Rebound, that allows us to choose the number of bounce of the light
 
-<img src="../savedTests/reboundAnimation1.gif">
+<img src="savedTests/reboundAnimation1.gif">
 
 
 
