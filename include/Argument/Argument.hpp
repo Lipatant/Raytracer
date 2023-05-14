@@ -7,6 +7,7 @@
 
 #pragma once
 #include <iostream>
+#include "Raytracer/Color.hpp"
 
 namespace Arg {
 
@@ -25,6 +26,8 @@ public:
     bool alphadup = false;
     bool angularcamera = false;
     bool noConsole = false;
+    //
+    Raytracer::Color skybox;
     //
     Argument(void);
     ~Argument(void) = default;

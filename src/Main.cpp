@@ -53,6 +53,7 @@ int main(int const ac, char * const * const av)
     if (Arg::INPUT.askUsage)
         return displayUsage(std::cout);
     fileScene.parseFile(Arg::INPUT.fileScene.c_str());
+    Arg::INPUT.skybox = fileScene.skybox;
     scene.camera.width = Arg::INPUT.width;
     scene.camera.height = Arg::INPUT.height;
     if (Arg::INPUT.isFovSet)

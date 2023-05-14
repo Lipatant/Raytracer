@@ -11,6 +11,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <libconfig.h++>
+#include "Raytracer/Color.hpp"
 
 #pragma once
 
@@ -26,6 +27,7 @@ namespace Parser
             double fov = 90;
             Math::Point3D camPos;
             Math::Angle3D camRot;
+            Raytracer::Color skybox;
             File(void){}
             ~File(void){}
             std::list<Shape::Shape> shapes;

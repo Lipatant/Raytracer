@@ -122,9 +122,28 @@ static Raytracer::Color simple_rgb_texture(const libconfig::Setting& shape)
     return color;
 }
 
+static bool create_object(Parser::File& file, const libconfig::Setting& shape)
+{
+    std::string str;
+
+    try {
+        if (!shape.lookupValue("file", str)) {
+            std::cerr << "'file' attribute no found inside for a Shape::Object" << std::endl;
+            return false;
+        }
+        file.shapes.push_back(Shape::createShape<Shape::Object>( \
+            str, Math::Point3D(file.x,file.y,file.z), file.scale, \
+            double_rgb_texture(shape)));
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return false;
+    }
+    return true;
+}
+
 static bool create_sphere(Parser::File& file, const libconfig::Setting& shape)
 {
-    double radius;
+    double radius = 1.0;
 
     try {
     shape.lookupValue("radius", radius);
@@ -140,12 +159,12 @@ static bool create_sphere(Parser::File& file, const libconfig::Setting& shape)
 
 static bool create_triangle(Parser::File& file, const libconfig::Setting& shape)
 {
-    int x1;
-    int y1;
-    int z1;
-    int x2;
-    int y2;
-    int z2;
+    double x1;
+    double y1;
+    double z1;
+    double x2;
+    double y2;
+    double z2;
     try {
         shape.lookupValue("x1", x1);
         shape.lookupValue("y1", y1);
@@ -166,12 +185,12 @@ static bool create_triangle(Parser::File& file, const libconfig::Setting& shape)
 
 static bool create_plane(Parser::File& file, const libconfig::Setting& shape)
 {
-    int vectx1;
-    int vecty1;
-    int vectz1;
-    int vectx2;
-    int vecty2;
-    int vectz2;
+    double vectx1;
+    double vecty1;
+    double vectz1;
+    double vectx2;
+    double vecty2;
+    double vectz2;
     try {
         shape.lookupValue("vectx1", vectx1);
         shape.lookupValue("vecty1", vecty1);
@@ -250,6 +269,8 @@ const std::map<std::string, bool (*)(Parser::File&, const libconfig::Setting&)> 
     {"directional_light", create_directional_light},
     {"directional", create_directional_light},
     {"group", create_group},
+    {"file", create_object},
+    {"object", create_object},
 };
 
 void Parser::File::new_element(const libconfig::Setting& s)
@@ -257,6 +278,7 @@ void Parser::File::new_element(const libconfig::Setting& s)
     std::string str;
     bool hasScale = false;
     Shape::Shape shape;
+    double scaleSingle;
 
     x = 0; y = 0; z = 0;
     scale = Math::Vector3D(1, 1, 1);
@@ -269,6 +291,11 @@ void Parser::File::new_element(const libconfig::Setting& s)
             std::cerr << "Couldn't parse '" << str << "' as a scaling vector" << std::endl;
         else
             hasScale = true;
+    } else if (s.lookupValue("scale", scaleSingle)) {
+        scale.x = scaleSingle;
+        scale.y = scaleSingle;
+        scale.z = scaleSingle;
+        hasScale = true;
     }
     if (FIGURES.find(shapename) == FIGURES.end()) {
         std::cerr << "unknown shape: " << shapename << std::endl;
@@ -285,9 +312,11 @@ void Parser::File::manage_camera(const libconfig::Setting& c)
     double posx;
     double posy;
     double posz;
-    int angle1;
-    int angle2;
-    int f;
+    double angle1;
+    double angle2;
+    double f;
+    std::string str;
+    Raytracer::Color light(RAYTRACER_TEXTURE_LIGHT_DEFAULT_VALUES);
 
     try {
         c.lookupValue("posx", posx);
@@ -295,6 +324,15 @@ void Parser::File::manage_camera(const libconfig::Setting& c)
         c.lookupValue("posz", posz);
         c.lookupValue("angle1", angle1);
         c.lookupValue("angle2", angle2);
+        if (c.lookupValue("color", str))
+            if (!get_color(str, light))
+                std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
+        if (c.lookupValue("sky", str))
+            if (!get_color(str, light))
+                std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
+        if (c.lookupValue("skybox", str))
+            if (!get_color(str, light))
+                std::cerr << "Couldn't parse '" << str << "' as a light" << std::endl;
         camPos = Math::Point3D(posx, posy, posz);
         camRot = Math::Angle3D(angle1, angle2);
     } catch (const std::exception& e) {
@@ -303,6 +341,7 @@ void Parser::File::manage_camera(const libconfig::Setting& c)
     }
     if (c.lookupValue("fov", f))
         fov = f;
+    skybox = light;
 }
 
 void Parser::File::generate_scene(libconfig::Config &cfg)

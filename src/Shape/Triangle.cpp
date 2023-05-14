@@ -58,5 +58,5 @@ Raytracer::HitPointList Shape::Triangle::hitPoints(Raytracer::Ray const &ray) \
         return {};
     distance = vOA.dot(normal) * f;
     return {Raytracer::HitPoint(distance, ray.origin + ray.direction * \
-        distance, _texture, normal.normalized())};
+        distance * (d < margin ? -1 : 1), _texture, normal.normalized())};
 }

@@ -1,0 +1,36 @@
+scene =
+{
+    camera = {
+        posx = -1.9;
+        posy = -1.9;
+        posz = 1.5;
+        angle1 = 50;
+        angle2 = -25;
+        skybox = "1 1 1 0.3"
+    };
+    shapes = (
+        {
+            shape = "sphere";
+            x = 2;
+            y = 2;
+            z = 2;
+            radius = 0.5;
+            light = "1 1 1";
+        },
+        {
+            shape = "sphere";
+            x = -2;
+            y = -2;
+            z = 2;
+            radius = 0.5;
+            light = "1 1 1";
+        },
+        {
+            shape = "object";
+            scale = 0.3;
+            file = "objects/Girl.obj";
+            color = "0.5 0.9 0.9";
+            light = "0.5 0.9 0.9 0.2";
+        }
+    );
+};

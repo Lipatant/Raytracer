@@ -39,13 +39,19 @@ static void displayDuration(std::ostream &stream, StaticHere::DisplayDuration \
 {
     std::size_t seconds = duration / 1000000;
     std::size_t minutes;
+    std::size_t hours;
 
     if (seconds >= 60) {
         minutes = seconds / 60;
         seconds %= 60;
         if (minutes >= 60) {
-            stream << minutes / 60 << "h ";
+            hours = minutes / 60;
             minutes %= 60;
+            if (hours >= 24) {
+                stream << hours / 24 << "d ";
+                hours %= 24;
+            }
+            stream << hours << "h ";
         }
         stream << minutes << "m ";
     }

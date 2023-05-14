@@ -90,7 +90,7 @@ static Raytracer::ColorValue randomColorValue(void)
 
 static Raytracer::Color getSkyBox(void)
 {
-    return Raytracer::Color(0.6, 0.9, 1.0, 0.2).withoutAlpha();
+    return Arg::INPUT.skybox;
 }
 
 Raytracer::Color Raytracer::Scene::_renderPureLight(Raytracer::HitPointList \
@@ -130,7 +130,7 @@ void Raytracer::Scene::_renderPureLighting(Raytracer::Ray ray, \
                 continue;
             pureLightColor = _renderPureLight(rayListPureLights(ray)) * \
                 dotProduct;
-            light = pureLightColor.withoutAlpha() * color.withoutAlpha();
+            light += pureLightColor.withoutAlpha() * color.withoutAlpha();
         }
     }
 }
@@ -146,7 +146,7 @@ Raytracer::Color Raytracer::Scene::_renderAtOnce(Raytracer::Ray ray, \
     hitPointList.sort();
     for (std::size_t i = 0; i < rebound; i++) {
         if (hitPointList.empty()) {
-            light += getSkyBox() * color;
+            light += getSkyBox().withoutAlpha() * color.withoutAlpha();
             return light;
         }
         texture = hitPointList.front().texture;

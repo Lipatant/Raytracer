@@ -12,7 +12,7 @@
 
 Shape::Plane::Plane(Math::Point3D const origin, Math::Vector3D const u, \
     Math::Vector3D const v) : AShape(SHAPE_PLANE_NAME), _origin(origin), \
-    _u(u), _v(v)
+    _u(u.normalized()), _v(v.normalized())
 { }
 
 Shape::Plane::Plane(Math::Point3D const origin, Math::Vector3D const u, \
@@ -23,7 +23,8 @@ Shape::Plane::Plane(Math::Point3D const origin, Math::Vector3D const u, \
 
 Shape::Plane::Plane(Math::Point3D const a, Math::Point3D const b, \
     Math::Point3D const c) : AShape(SHAPE_PLANE_NAME), _origin(a), \
-    _u(Math::Vector3D(b - a)), _v(Math::Vector3D(c - a))
+    _u(Math::Vector3D(b - a).normalized()), \
+    _v(Math::Vector3D(c - a).normalized())
 { }
 
 Shape::Plane::Plane(Math::Point3D const a, Math::Point3D const b, \

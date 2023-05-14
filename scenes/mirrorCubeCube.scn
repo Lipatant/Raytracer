@@ -1,0 +1,120 @@
+scene =
+{
+    camera = {
+        posx = -1.9;
+        posy = -1.9;
+        posz = 1.5;
+        angle1 = 50;
+        angle2 = -25;
+    };
+    shapes = (
+        {
+            shape = "sphere";
+            x = 2;
+            y = 2;
+            z = 2;
+            radius = 0.5;
+            light = "1 1 1 1.0";
+        },
+        {
+            shape = "sphere";
+            x = -2;
+            y = -2;
+            z = 2;
+            radius = 0.5;
+            light = "1 1 1 1.0";
+        },
+        {
+            shape = "object";
+            scale = 0.6;
+            file = "objects/shapes/Cube.obj";
+            color = "0.9 0.9 0.9";
+            mirror = 0.8;
+        },
+        {
+            shape = "plane";
+            x = 0;
+            y = 0;
+            z = 2;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 1;
+            vectz2 = 0;
+            color = "1.0 1.0 1.0";
+            light = "1.0 1.0 1.0 0.2";
+            mirror = 0.98;
+        },
+        {
+            shape = "plane";
+            x = 0;
+            y = 0;
+            z = -2;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 1;
+            vectz2 = 0;
+            color = "1 1 1";
+            mirror = 0.98;
+        },
+        {
+            shape = "plane";
+            x = 2;
+            y = 0;
+            z = 0;
+            vectx1 = 0;
+            vecty1 = 1;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "0.5 0.5 1.0";
+            mirror = 0.98;
+        },
+        {
+            shape = "plane";
+            x = -2;
+            y = 0;
+            z = 0;
+            vectx1 = 0;
+            vecty1 = 1;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "1.0 1.0 1.0";
+            mirror = 0.98;
+        },
+        {
+            shape = "plane";
+            x = 0;
+            y = -2;
+            z = 0;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "1.0 0.5 0.5";
+            mirror = 0.98;
+        },
+        {
+            shape = "plane";
+            x = 0;
+            y = 2;
+            z = 0;
+            vectx1 = 1;
+            vecty1 = 0;
+            vectz1 = 0;
+            vectx2 = 0;
+            vecty2 = 0;
+            vectz2 = 1;
+            color = "0.5 1 0.5"
+            mirror = 0.98;
+        }
+    );
+};
